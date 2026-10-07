@@ -1,0 +1,4488 @@
+[
+  {
+    "id": "disk-dd-image",
+    "title": "Create Raw Disk Image 💿",
+    "title_ar": "إنشاء نسخة خام من القرص (Raw Image) 💿",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "dd if={input_dev} of={output_img} bs=64K status=progress",
+    "description": "Creates a bit-by-bit raw image copy of a target block device for evidence preservation.",
+    "description_ar": "ينشئ نسخة طبق الأصل بت ببت من وحدة تخزين مستهدفة للحفاظ على الدليل الرقمي.",
+    "params": [
+      {
+        "key": "input_dev",
+        "label": "Input Device 🔌",
+        "label_ar": "الجهاز المصدر (Device) 🔌",
+        "default": "/dev/sdb"
+      },
+      {
+        "key": "output_img",
+        "label": "Output Image Path 📁",
+        "label_ar": "مسار ملف الصورة الناتج 📁",
+        "default": "/evidence/disk.img"
+      }
+    ],
+    "tags": [
+      "dd",
+      "disk",
+      "raw",
+      "imaging"
+    ]
+  },
+  {
+    "id": "disk-hash-verify",
+    "title": "Calculate SHA-256 Hash 🔐",
+    "title_ar": "حساب بصمة الملف (SHA-256) 🔐",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "sha256sum {image_path}",
+    "description": "Calculates the cryptographic hash of a disk image to verify integrity and maintain chain of custody.",
+    "description_ar": "يحسب البصمة التشفيرية لصورة القرص للتحقق من سلامتها والحفاظ على سلسلة الحيازة (Chain of Custody).",
+    "params": [
+      {
+        "key": "image_path",
+        "label": "Evidence File Path 📄",
+        "label_ar": "مسار ملف الدليل 📄",
+        "default": "/evidence/disk.img"
+      }
+    ],
+    "tags": [
+      "sha256",
+      "hash",
+      "integrity",
+      "verification"
+    ]
+  },
+  {
+    "id": "proc-forest-list",
+    "title": "Display Process Forest Tree 🌳",
+    "title_ar": "عرض شجرة العمليات 🌳",
+    "category": "Processes & RAM 🧠",
+    "category_ar": "العمليات والذاكرة العشوائية (RAM) 🧠",
+    "command": "ps aux --forest",
+    "description": "Displays all running processes in a hierarchical tree layout to detect suspicious parent-child relationships.",
+    "description_ar": "يعرض كل العمليات الجارية في هيكل شجري لكشف علاقات الأب والابن المريبة بين العمليات.",
+    "params": [],
+    "tags": [
+      "ps",
+      "processes",
+      "tree",
+      "execution"
+    ]
+  },
+  {
+    "id": "proc-lsof-pid",
+    "title": "List Process Open Files 📂",
+    "title_ar": "عرض الملفات المفتوحة لعملية 📂",
+    "category": "Processes & RAM 🧠",
+    "category_ar": "العمليات والذاكرة العشوائية (RAM) 🧠",
+    "command": "lsof -p {pid}",
+    "description": "Lists all open file descriptors, sockets, and memory-mapped libraries used by a specific process ID.",
+    "description_ar": "يسرد الملفات والمقابس (Sockets) والمكتبات المحمّلة في الذاكرة التي تستخدمها عملية محددة.",
+    "params": [
+      {
+        "key": "pid",
+        "label": "Process ID (PID) 🔢",
+        "label_ar": "معرّف العملية (PID) 🔢",
+        "default": "1337"
+      }
+    ],
+    "tags": [
+      "lsof",
+      "pid",
+      "handles",
+      "files"
+    ]
+  },
+  {
+    "id": "file-stat-macb",
+    "title": "Extract MACB Timestamps ⏳",
+    "title_ar": "استخراج الطوابع الزمنية (MACB) ⏳",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "stat {file_path}",
+    "description": "Extracts detailed file attributes including Modification, Access, Change, and Birth (MACB) timestamps.",
+    "description_ar": "يستخرج خصائص الملف التفصيلية، ومنها أوقات التعديل والوصول والتغيير والإنشاء.",
+    "params": [
+      {
+        "key": "file_path",
+        "label": "Target File Path 🎯",
+        "label_ar": "مسار الملف المستهدف 🎯",
+        "default": "/home/user/malicious.sh"
+      }
+    ],
+    "tags": [
+      "stat",
+      "timestamps",
+      "macb",
+      "metadata"
+    ]
+  },
+  {
+    "id": "net-listening-ports",
+    "title": "List Listening Ports & PIDs 📡",
+    "title_ar": "عرض المنافذ المفتوحة وعملياتها 📡",
+    "category": "Network Forensics 📡",
+    "category_ar": "التحقيق في الشبكات (Network Forensics) 📡",
+    "command": "ss -tulpn",
+    "description": "Displays active TCP/UDP socket connections, listening ports, and their associated process names and PIDs.",
+    "description_ar": "يعرض اتصالات (TCP/UDP) النشطة والمنافذ المستمعة وأسماء العمليات المرتبطة بها.",
+    "params": [],
+    "tags": [
+      "ss",
+      "network",
+      "sockets",
+      "ports"
+    ]
+  },
+  {
+    "id": "logs-auth-history",
+    "title": "Check User Login History 👤",
+    "title_ar": "فحص سجل دخول المستخدمين 👤",
+    "category": "System Logs & History 📑",
+    "category_ar": "سجلات النظام والتاريخ (Logs) 📑",
+    "command": "last -f /var/log/wtmp",
+    "description": "Parses system login logs to show past user sessions, login times, and remote IP addresses.",
+    "description_ar": "يحلل سجلات الدخول لعرض جلسات المستخدمين السابقة وأوقاتها وعناوين (IP) البعيدة.",
+    "params": [],
+    "tags": [
+      "last",
+      "wtmp",
+      "logins",
+      "authentication"
+    ]
+  },
+  {
+    "id": "disk-list-blockdev",
+    "title": "List Block Devices 🧱",
+    "title_ar": "عرض أجهزة التخزين 🧱",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "lsblk -f",
+    "description": "Lists all block devices with filesystem type, label, and UUID to identify evidence media.",
+    "description_ar": "يسرد كل أجهزة التخزين مع نوع نظام الملفات والتسمية و(UUID) لتحديد وسيط الدليل.",
+    "params": [],
+    "tags": [
+      "lsblk",
+      "disk",
+      "devices",
+      "uuid"
+    ]
+  },
+  {
+    "id": "disk-fdisk-list",
+    "title": "List Partition Tables 🧩",
+    "title_ar": "عرض جداول الأقسام 🧩",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "fdisk -l {input_dev}",
+    "description": "Prints the partition table of a device without modifying it.",
+    "description_ar": "يطبع جدول الأقسام للجهاز دون إجراء أي تعديل عليه.",
+    "params": [
+      {
+        "key": "input_dev",
+        "label": "Input Device 🔌",
+        "label_ar": "الجهاز المصدر (Device) 🔌",
+        "default": "/dev/sdb"
+      }
+    ],
+    "tags": [
+      "fdisk",
+      "partitions",
+      "mbr",
+      "gpt"
+    ]
+  },
+  {
+    "id": "disk-mmls",
+    "title": "Show Partition Layout (Sleuth Kit) 🗺️",
+    "title_ar": "عرض تخطيط الأقسام (Sleuth Kit) 🗺️",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "mmls {image_path}",
+    "description": "Displays the partition layout of a disk image including sector offsets needed for later analysis.",
+    "description_ar": "يعرض تخطيط الأقسام داخل صورة القرص مع إزاحات القطاعات اللازمة للتحليل لاحقًا.",
+    "params": [
+      {
+        "key": "image_path",
+        "label": "Evidence File Path 📄",
+        "label_ar": "مسار ملف الدليل 📄",
+        "default": "/evidence/disk.img"
+      }
+    ],
+    "tags": [
+      "mmls",
+      "sleuthkit",
+      "partitions",
+      "offset"
+    ]
+  },
+  {
+    "id": "disk-fsstat",
+    "title": "Filesystem Details (fsstat) 📊",
+    "title_ar": "تفاصيل نظام الملفات (fsstat) 📊",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "fsstat {image_path}",
+    "description": "Shows filesystem metadata such as type, block size, and inode ranges from an image.",
+    "description_ar": "يعرض بيانات نظام الملفات مثل النوع وحجم الكتلة ونطاقات (Inodes) من الصورة.",
+    "params": [
+      {
+        "key": "image_path",
+        "label": "Evidence File Path 📄",
+        "label_ar": "مسار ملف الدليل 📄",
+        "default": "/evidence/disk.img"
+      }
+    ],
+    "tags": [
+      "fsstat",
+      "sleuthkit",
+      "filesystem",
+      "metadata"
+    ]
+  },
+  {
+    "id": "disk-ewfacquire",
+    "title": "Acquire E01 Forensic Image 📀",
+    "title_ar": "الحصول على صورة جنائية (E01) 📀",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "ewfacquire -t {output_dir}/case001 -f encase6 -c deflate {input_dev}",
+    "description": "Acquires a compressed EnCase (E01) image with embedded case metadata and hashes.",
+    "description_ar": "ينشئ صورة مضغوطة بصيغة (EnCase) مع بيانات القضية والبصمات المضمّنة.",
+    "params": [
+      {
+        "key": "output_dir",
+        "label": "Output Directory 📁",
+        "label_ar": "مجلد المخرجات 📁",
+        "default": "/evidence/output"
+      },
+      {
+        "key": "input_dev",
+        "label": "Input Device 🔌",
+        "label_ar": "الجهاز المصدر (Device) 🔌",
+        "default": "/dev/sdb"
+      }
+    ],
+    "tags": [
+      "ewfacquire",
+      "e01",
+      "imaging",
+      "encase"
+    ]
+  },
+  {
+    "id": "disk-ewfverify",
+    "title": "Verify E01 Image Integrity ✅",
+    "title_ar": "التحقق من سلامة صورة (E01) ✅",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "ewfverify {image_path}",
+    "description": "Verifies the stored hashes of an EWF/E01 image against its actual content.",
+    "description_ar": "يقارن البصمات المخزنة في صورة (EWF) بمحتواها الفعلي للتأكد من عدم تغيّرها.",
+    "params": [
+      {
+        "key": "image_path",
+        "label": "Evidence File Path 📄",
+        "label_ar": "مسار ملف الدليل 📄",
+        "default": "/evidence/disk.img"
+      }
+    ],
+    "tags": [
+      "ewfverify",
+      "e01",
+      "verification",
+      "hash"
+    ]
+  },
+  {
+    "id": "disk-dc3dd",
+    "title": "Image With dc3dd and Hash 🧪",
+    "title_ar": "التصوير مع البصمة عبر (dc3dd) 🧪",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "dc3dd if={input_dev} of={output_img} hash=sha256 log={output_dir}/dc3dd.log",
+    "description": "Forensic-focused dd variant that hashes while imaging and writes an audit log.",
+    "description_ar": "نسخة من (dd) مخصصة للأدلة الجنائية؛ تحسب البصمة أثناء النسخ وتكتب سجل تدقيق.",
+    "params": [
+      {
+        "key": "input_dev",
+        "label": "Input Device 🔌",
+        "label_ar": "الجهاز المصدر (Device) 🔌",
+        "default": "/dev/sdb"
+      },
+      {
+        "key": "output_img",
+        "label": "Output Image Path 📁",
+        "label_ar": "مسار ملف الصورة الناتج 📁",
+        "default": "/evidence/disk.img"
+      },
+      {
+        "key": "output_dir",
+        "label": "Output Directory 📁",
+        "label_ar": "مجلد المخرجات 📁",
+        "default": "/evidence/output"
+      }
+    ],
+    "tags": [
+      "dc3dd",
+      "imaging",
+      "hash",
+      "log"
+    ]
+  },
+  {
+    "id": "disk-ddrescue",
+    "title": "Image Failing Disk (ddrescue) 🛟",
+    "title_ar": "تصوير قرص تالف (ddrescue) 🛟",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "ddrescue -d -r3 {input_dev} {output_img} {output_dir}/rescue.map",
+    "description": "Copies data from damaged media, retrying bad sectors and tracking progress in a map file.",
+    "description_ar": "ينسخ البيانات من وسيط تالف مع إعادة محاولة القطاعات المعطوبة وتتبع التقدم في ملف خريطة.",
+    "params": [
+      {
+        "key": "input_dev",
+        "label": "Input Device 🔌",
+        "label_ar": "الجهاز المصدر (Device) 🔌",
+        "default": "/dev/sdb"
+      },
+      {
+        "key": "output_img",
+        "label": "Output Image Path 📁",
+        "label_ar": "مسار ملف الصورة الناتج 📁",
+        "default": "/evidence/disk.img"
+      },
+      {
+        "key": "output_dir",
+        "label": "Output Directory 📁",
+        "label_ar": "مجلد المخرجات 📁",
+        "default": "/evidence/output"
+      }
+    ],
+    "tags": [
+      "ddrescue",
+      "damaged",
+      "recovery",
+      "imaging"
+    ]
+  },
+  {
+    "id": "disk-dcfldd",
+    "title": "Image With dcfldd 🧬",
+    "title_ar": "التصوير عبر (dcfldd) 🧬",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "dcfldd if={input_dev} of={output_img} hash=sha256 hashlog={output_dir}/hash.log bs=64k",
+    "description": "Creates a raw image while computing a SHA-256 hash on the fly.",
+    "description_ar": "ينشئ صورة خام ويحسب بصمة (SHA-256) في الوقت نفسه.",
+    "params": [
+      {
+        "key": "input_dev",
+        "label": "Input Device 🔌",
+        "label_ar": "الجهاز المصدر (Device) 🔌",
+        "default": "/dev/sdb"
+      },
+      {
+        "key": "output_img",
+        "label": "Output Image Path 📁",
+        "label_ar": "مسار ملف الصورة الناتج 📁",
+        "default": "/evidence/disk.img"
+      },
+      {
+        "key": "output_dir",
+        "label": "Output Directory 📁",
+        "label_ar": "مجلد المخرجات 📁",
+        "default": "/evidence/output"
+      }
+    ],
+    "tags": [
+      "dcfldd",
+      "imaging",
+      "hash",
+      "raw"
+    ]
+  },
+  {
+    "id": "disk-blockdev-ro",
+    "title": "Set Device Read-Only 🔒",
+    "title_ar": "تحويل الجهاز إلى وضع القراءة فقط 🔒",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "blockdev --setro {input_dev}",
+    "description": "Sets the kernel read-only flag on a block device to prevent accidental writes.",
+    "description_ar": "يضع علامة القراءة فقط على الجهاز في النواة لمنع أي كتابة عرضية عليه.",
+    "params": [
+      {
+        "key": "input_dev",
+        "label": "Input Device 🔌",
+        "label_ar": "الجهاز المصدر (Device) 🔌",
+        "default": "/dev/sdb"
+      }
+    ],
+    "tags": [
+      "blockdev",
+      "write-blocker",
+      "readonly"
+    ]
+  },
+  {
+    "id": "disk-blockdev-getro",
+    "title": "Verify Read-Only Flag 🔍",
+    "title_ar": "التأكد من وضع القراءة فقط 🔍",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "blockdev --getro {input_dev}",
+    "description": "Returns 1 if the device is flagged read-only, confirming the software write block is active.",
+    "description_ar": "يعيد القيمة 1 إذا كان الجهاز للقراءة فقط، مما يؤكد تفعيل الحماية البرمجية من الكتابة.",
+    "params": [
+      {
+        "key": "input_dev",
+        "label": "Input Device 🔌",
+        "label_ar": "الجهاز المصدر (Device) 🔌",
+        "default": "/dev/sdb"
+      }
+    ],
+    "tags": [
+      "blockdev",
+      "readonly",
+      "verification"
+    ]
+  },
+  {
+    "id": "disk-mount-ro-loop",
+    "title": "Mount Image Read-Only 📌",
+    "title_ar": "ربط الصورة للقراءة فقط 📌",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "mount -o ro,loop,noexec,nodev,offset={offset_bytes} {image_path} {mount_point}",
+    "description": "Mounts a partition from a raw image read-only with execution disabled for safe browsing.",
+    "description_ar": "يربط قسمًا من صورة خام للقراءة فقط مع تعطيل التنفيذ لتصفحه بأمان.",
+    "params": [
+      {
+        "key": "offset_bytes",
+        "label": "Offset in Bytes 🧮",
+        "label_ar": "الإزاحة بالبايت (Offset) 🧮",
+        "default": "1048576"
+      },
+      {
+        "key": "image_path",
+        "label": "Evidence File Path 📄",
+        "label_ar": "مسار ملف الدليل 📄",
+        "default": "/evidence/disk.img"
+      },
+      {
+        "key": "mount_point",
+        "label": "Mount Point 📌",
+        "label_ar": "نقطة الربط (Mount Point) 📌",
+        "default": "/mnt/evidence"
+      }
+    ],
+    "tags": [
+      "mount",
+      "loop",
+      "readonly",
+      "image"
+    ]
+  },
+  {
+    "id": "disk-umount",
+    "title": "Unmount Evidence Safely 🔓",
+    "title_ar": "فصل الدليل بأمان 🔓",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "umount {mount_point}",
+    "description": "Unmounts a previously mounted evidence image.",
+    "description_ar": "يفصل صورة الدليل التي سبق ربطها.",
+    "params": [
+      {
+        "key": "mount_point",
+        "label": "Mount Point 📌",
+        "label_ar": "نقطة الربط (Mount Point) 📌",
+        "default": "/mnt/evidence"
+      }
+    ],
+    "tags": [
+      "umount",
+      "mount",
+      "cleanup"
+    ]
+  },
+  {
+    "id": "disk-losetup-ro",
+    "title": "Attach Image as Read-Only Loop Device 🔁",
+    "title_ar": "ربط الصورة كجهاز (Loop) للقراءة فقط 🔁",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "losetup -r -f --show -P {image_path}",
+    "description": "Attaches an image to a read-only loop device and scans its partitions.",
+    "description_ar": "يربط الصورة بجهاز (Loop) للقراءة فقط ويفحص أقسامها.",
+    "params": [
+      {
+        "key": "image_path",
+        "label": "Evidence File Path 📄",
+        "label_ar": "مسار ملف الدليل 📄",
+        "default": "/evidence/disk.img"
+      }
+    ],
+    "tags": [
+      "losetup",
+      "loop",
+      "readonly",
+      "image"
+    ]
+  },
+  {
+    "id": "disk-losetup-detach",
+    "title": "Detach All Loop Devices 🧹",
+    "title_ar": "فصل كل أجهزة (Loop) 🧹",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "losetup -D",
+    "description": "Detaches all loop devices after analysis is complete.",
+    "description_ar": "يفصل كل أجهزة (Loop) بعد الانتهاء من التحليل.",
+    "params": [],
+    "tags": [
+      "losetup",
+      "loop",
+      "cleanup"
+    ]
+  },
+  {
+    "id": "disk-hdparm-info",
+    "title": "Read Drive Identity 🪪",
+    "title_ar": "قراءة هوية القرص 🪪",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "hdparm -I {input_dev}",
+    "description": "Shows model, serial number, firmware, and HPA/DCO information for an ATA drive.",
+    "description_ar": "يعرض الموديل والرقم التسلسلي والبرنامج الثابت ومعلومات (HPA/DCO) لقرص (ATA).",
+    "params": [
+      {
+        "key": "input_dev",
+        "label": "Input Device 🔌",
+        "label_ar": "الجهاز المصدر (Device) 🔌",
+        "default": "/dev/sdb"
+      }
+    ],
+    "tags": [
+      "hdparm",
+      "serial",
+      "hpa",
+      "dco"
+    ]
+  },
+  {
+    "id": "disk-smartctl",
+    "title": "SMART Health Report 🩺",
+    "title_ar": "تقرير صحة القرص (SMART) 🩺",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "smartctl -a {input_dev}",
+    "description": "Prints SMART attributes, error logs, and power-on hours for a drive.",
+    "description_ar": "يطبع سمات (SMART) وسجلات الأخطاء وعدد ساعات التشغيل للقرص.",
+    "params": [
+      {
+        "key": "input_dev",
+        "label": "Input Device 🔌",
+        "label_ar": "الجهاز المصدر (Device) 🔌",
+        "default": "/dev/sdb"
+      }
+    ],
+    "tags": [
+      "smartctl",
+      "smart",
+      "health",
+      "drive"
+    ]
+  },
+  {
+    "id": "disk-blkid",
+    "title": "Show Block ID Attributes 🏷️",
+    "title_ar": "عرض معرّفات القسم 🏷️",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "blkid {partition}",
+    "description": "Displays UUID, label, and filesystem type of a partition.",
+    "description_ar": "يعرض (UUID) والتسمية ونوع نظام الملفات للقسم.",
+    "params": [
+      {
+        "key": "partition",
+        "label": "Partition 🧩",
+        "label_ar": "القسم (Partition) 🧩",
+        "default": "/dev/sdb1"
+      }
+    ],
+    "tags": [
+      "blkid",
+      "uuid",
+      "label",
+      "filesystem"
+    ]
+  },
+  {
+    "id": "disk-fls-deleted",
+    "title": "List Deleted Files (fls) 🗑️",
+    "title_ar": "سرد الملفات المحذوفة (fls) 🗑️",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "fls -r -d -o {sector_offset} {image_path}",
+    "description": "Recursively lists deleted file entries still present in filesystem metadata.",
+    "description_ar": "يسرد بشكل متكرر مدخلات الملفات المحذوفة التي ما زالت في بيانات نظام الملفات.",
+    "params": [
+      {
+        "key": "sector_offset",
+        "label": "Sector Offset 🧮",
+        "label_ar": "إزاحة القطاع (Sector Offset) 🧮",
+        "default": "2048"
+      },
+      {
+        "key": "image_path",
+        "label": "Evidence File Path 📄",
+        "label_ar": "مسار ملف الدليل 📄",
+        "default": "/evidence/disk.img"
+      }
+    ],
+    "tags": [
+      "fls",
+      "deleted",
+      "sleuthkit",
+      "recovery"
+    ]
+  },
+  {
+    "id": "disk-icat",
+    "title": "Recover File by Inode (icat) 🛠️",
+    "title_ar": "استرجاع ملف عبر رقم (Inode) 🛠️",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "icat -o {sector_offset} {image_path} {inode} > {output_dir}/recovered.bin",
+    "description": "Extracts the content of a file by its inode number from an image.",
+    "description_ar": "يستخرج محتوى ملف باستخدام رقم العقدة الخاص به من الصورة.",
+    "params": [
+      {
+        "key": "sector_offset",
+        "label": "Sector Offset 🧮",
+        "label_ar": "إزاحة القطاع (Sector Offset) 🧮",
+        "default": "2048"
+      },
+      {
+        "key": "image_path",
+        "label": "Evidence File Path 📄",
+        "label_ar": "مسار ملف الدليل 📄",
+        "default": "/evidence/disk.img"
+      },
+      {
+        "key": "inode",
+        "label": "Inode Number 🔢",
+        "label_ar": "رقم العقدة (Inode) 🔢",
+        "default": "12345"
+      },
+      {
+        "key": "output_dir",
+        "label": "Output Directory 📁",
+        "label_ar": "مجلد المخرجات 📁",
+        "default": "/evidence/output"
+      }
+    ],
+    "tags": [
+      "icat",
+      "inode",
+      "recovery",
+      "sleuthkit"
+    ]
+  },
+  {
+    "id": "disk-ils",
+    "title": "List Inodes (ils) 📇",
+    "title_ar": "سرد عقد الملفات (ils) 📇",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "ils -e -o {sector_offset} {image_path}",
+    "description": "Lists inode metadata, including unallocated entries, for timeline and recovery work.",
+    "description_ar": "يسرد بيانات (Inodes) بما فيها غير المخصصة، للاستفادة منها في الخط الزمني والاسترجاع.",
+    "params": [
+      {
+        "key": "sector_offset",
+        "label": "Sector Offset 🧮",
+        "label_ar": "إزاحة القطاع (Sector Offset) 🧮",
+        "default": "2048"
+      },
+      {
+        "key": "image_path",
+        "label": "Evidence File Path 📄",
+        "label_ar": "مسار ملف الدليل 📄",
+        "default": "/evidence/disk.img"
+      }
+    ],
+    "tags": [
+      "ils",
+      "inode",
+      "sleuthkit",
+      "metadata"
+    ]
+  },
+  {
+    "id": "disk-xxd-mbr",
+    "title": "Dump MBR Boot Sector 🧾",
+    "title_ar": "تفريغ قطاع الإقلاع (MBR) 🧾",
+    "category": "Disk & Imaging 💾",
+    "category_ar": "الأقراص والتصوير الجنائي (Imaging) 💾",
+    "command": "dd if={input_dev} bs=512 count=1 | xxd",
+    "description": "Dumps the first 512 bytes of a disk to inspect the MBR and partition entries.",
+    "description_ar": "يفرّغ أول 512 بايت من القرص لفحص (MBR) ومدخلات الأقسام.",
+    "params": [
+      {
+        "key": "input_dev",
+        "label": "Input Device 🔌",
+        "label_ar": "الجهاز المصدر (Device) 🔌",
+        "default": "/dev/sdb"
+      }
+    ],
+    "tags": [
+      "mbr",
+      "bootsector",
+      "xxd",
+      "hexdump"
+    ]
+  },
+  {
+    "id": "hash-md5",
+    "title": "Calculate MD5 Hash 🔑",
+    "title_ar": "حساب بصمة (MD5) 🔑",
+    "category": "Hashing & Integrity 🔐",
+    "category_ar": "البصمات وسلامة الأدلة (Hashing) 🔐",
+    "command": "md5sum {image_path}",
+    "description": "Computes an MD5 checksum, commonly used for legacy hash-set comparison.",
+    "description_ar": "يحسب بصمة (MD5)، وتُستخدم عادةً لمطابقة مجموعات البصمات القديمة.",
+    "params": [
+      {
+        "key": "image_path",
+        "label": "Evidence File Path 📄",
+        "label_ar": "مسار ملف الدليل 📄",
+        "default": "/evidence/disk.img"
+      }
+    ],
+    "tags": [
+      "md5",
+      "hash",
+      "integrity"
+    ]
+  },
+  {
+    "id": "hash-sha1",
+    "title": "Calculate SHA-1 Hash 🔑",
+    "title_ar": "حساب بصمة (SHA-1) 🔑",
+    "category": "Hashing & Integrity 🔐",
+    "category_ar": "البصمات وسلامة الأدلة (Hashing) 🔐",
+    "command": "sha1sum {image_path}",
+    "description": "Computes a SHA-1 checksum for compatibility with older evidence records.",
+    "description_ar": "يحسب بصمة (SHA-1) لتتوافق مع سجلات الأدلة القديمة.",
+    "params": [
+      {
+        "key": "image_path",
+        "label": "Evidence File Path 📄",
+        "label_ar": "مسار ملف الدليل 📄",
+        "default": "/evidence/disk.img"
+      }
+    ],
+    "tags": [
+      "sha1",
+      "hash",
+      "integrity"
+    ]
+  },
+  {
+    "id": "hash-sha512",
+    "title": "Calculate SHA-512 Hash 🔑",
+    "title_ar": "حساب بصمة (SHA-512) 🔑",
+    "category": "Hashing & Integrity 🔐",
+    "category_ar": "البصمات وسلامة الأدلة (Hashing) 🔐",
+    "command": "sha512sum {image_path}",
+    "description": "Computes a SHA-512 checksum for stronger integrity validation.",
+    "description_ar": "يحسب بصمة (SHA-512) لتحقق أقوى من السلامة.",
+    "params": [
+      {
+        "key": "image_path",
+        "label": "Evidence File Path 📄",
+        "label_ar": "مسار ملف الدليل 📄",
+        "default": "/evidence/disk.img"
+      }
+    ],
+    "tags": [
+      "sha512",
+      "hash",
+      "integrity"
+    ]
+  },
+  {
+    "id": "hash-dir-recursive",
+    "title": "Hash Every File in Directory 🗂️",
+    "title_ar": "حساب بصمات كل ملفات مجلد 🗂️",
+    "category": "Hashing & Integrity 🔐",
+    "category_ar": "البصمات وسلامة الأدلة (Hashing) 🔐",
+    "command": "find {search_dir} -type f -exec sha256sum {} + > {output_dir}/hashes.sha256",
+    "description": "Generates SHA-256 hashes for all files under a directory into a manifest.",
+    "description_ar": "ينشئ بصمات (SHA-256) لكل الملفات داخل المجلد ويحفظها في ملف قائمة.",
+    "params": [
+      {
+        "key": "search_dir",
+        "label": "Search Directory 📂",
+        "label_ar": "مجلد البحث 📂",
+        "default": "/home"
+      },
+      {
+        "key": "output_dir",
+        "label": "Output Directory 📁",
+        "label_ar": "مجلد المخرجات 📁",
+        "default": "/evidence/output"
+      }
+    ],
+    "tags": [
+      "find",
+      "sha256",
+      "manifest",
+      "recursive"
+    ]
+  },
+  {
+    "id": "hash-verify-list",
+    "title": "Verify Against Hash List ✅",
+    "title_ar": "التحقق من البصمات مقابل قائمة ✅",
+    "category": "Hashing & Integrity 🔐",
+    "category_ar": "البصمات وسلامة الأدلة (Hashing) 🔐",
+    "command": "sha256sum -c {hash_file}",
+    "description": "Re-computes hashes and compares them with a stored manifest to detect changes.",
+    "description_ar": "يعيد حساب البصمات ويقارنها بالقائمة المحفوظة لكشف أي تغيير.",
+    "params": [
+      {
+        "key": "hash_file",
+        "label": "Hash List File 📃",
+        "label_ar": "ملف قائمة البصمات (Hash) 📃",
+        "default": "/evidence/hashes.sha256"
+      }
+    ],
+    "tags": [
+      "sha256sum",
+      "verify",
+      "manifest",
+      "integrity"
+    ]
+  },
+  {
+    "id": "hash-hashdeep",
+    "title": "Audit Directory With hashdeep 🧮",
+    "title_ar": "تدقيق مجلد بأداة (hashdeep) 🧮",
+    "category": "Hashing & Integrity 🔐",
+    "category_ar": "البصمات وسلامة الأدلة (Hashing) 🔐",
+    "command": "hashdeep -r -l {search_dir} > {output_dir}/hashdeep.txt",
+    "description": "Creates a recursive multi-algorithm hash audit file for a directory.",
+    "description_ar": "ينشئ ملف تدقيق متكرر بعدة خوارزميات بصمة للمجلد.",
+    "params": [
+      {
+        "key": "search_dir",
+        "label": "Search Directory 📂",
+        "label_ar": "مجلد البحث 📂",
+        "default": "/home"
+      },
+      {
+        "key": "output_dir",
+        "label": "Output Directory 📁",
+        "label_ar": "مجلد المخرجات 📁",
+        "default": "/evidence/output"
+      }
+    ],
+    "tags": [
+      "hashdeep",
+      "audit",
+      "recursive",
+      "hash"
+    ]
+  },
+  {
+    "id": "hash-compare-two",
+    "title": "Compare Two Files by Hash ⚖️",
+    "title_ar": "مقارنة ملفين بالبصمة ⚖️",
+    "category": "Hashing & Integrity 🔐",
+    "category_ar": "البصمات وسلامة الأدلة (Hashing) 🔐",
+    "command": "sha256sum {image_path} {file_path}",
+    "description": "Hashes two files side by side to check whether their content is identical.",
+    "description_ar": "يحسب بصمة ملفين جنبًا إلى جنب لمعرفة ما إذا كان محتواهما متطابقًا.",
+    "params": [
+      {
+        "key": "image_path",
+        "label": "Evidence File Path 📄",
+        "label_ar": "مسار ملف الدليل 📄",
+        "default": "/evidence/disk.img"
+      },
+      {
+        "key": "file_path",
+        "label": "Target File Path 🎯",
+        "label_ar": "مسار الملف المستهدف 🎯",
+        "default": "/home/user/malicious.sh"
+      }
+    ],
+    "tags": [
+      "sha256",
+      "compare",
+      "duplicate"
+    ]
+  },
+  {
+    "id": "hash-ssdeep",
+    "title": "Fuzzy Hash With ssdeep 🌫️",
+    "title_ar": "البصمة التقريبية (ssdeep) 🌫️",
+    "category": "Hashing & Integrity 🔐",
+    "category_ar": "البصمات وسلامة الأدلة (Hashing) 🔐",
+    "command": "ssdeep -b {file_path}",
+    "description": "Produces a context-triggered piecewise hash to find similar but not identical files.",
+    "description_ar": "ينتج بصمة تقريبية تساعد في إيجاد ملفات متشابهة وإن لم تكن متطابقة.",
+    "params": [
+      {
+        "key": "file_path",
+        "label": "Target File Path 🎯",
+        "label_ar": "مسار الملف المستهدف 🎯",
+        "default": "/home/user/malicious.sh"
+      }
+    ],
+    "tags": [
+      "ssdeep",
+      "fuzzy",
+      "similarity"
+    ]
+  },
+  {
+    "id": "hash-find-by-hash",
+    "title": "Find File Matching a Hash 🎯",
+    "title_ar": "البحث عن ملف بقيمة بصمة معروفة 🎯",
+    "category": "Hashing & Integrity 🔐",
+    "category_ar": "البصمات وسلامة الأدلة (Hashing) 🔐",
+    "command": "find {search_dir} -type f -exec sha256sum {} + | grep {hash_value}",
+    "description": "Searches a directory tree for files whose hash matches a known value.",
+    "description_ar": "يبحث في شجرة المجلدات عن ملفات تطابق بصمتها قيمة معروفة.",
+    "params": [
+      {
+        "key": "search_dir",
+        "label": "Search Directory 📂",
+        "label_ar": "مجلد البحث 📂",
+        "default": "/home"
+      },
+      {
+        "key": "hash_value",
+        "label": "Hash Value #️⃣",
+        "label_ar": "قيمة البصمة (Hash) #️⃣",
+        "default": "d41d8cd98f00b204e9800998ecf8427e"
+      }
+    ],
+    "tags": [
+      "find",
+      "hash",
+      "ioc",
+      "search"
+    ]
+  },
+  {
+    "id": "hash-gpg-sign",
+    "title": "Sign Hash List With GPG ✍️",
+    "title_ar": "توقيع قائمة البصمات بـ (GPG) ✍️",
+    "category": "Hashing & Integrity 🔐",
+    "category_ar": "البصمات وسلامة الأدلة (Hashing) 🔐",
+    "command": "gpg --detach-sign --armor {hash_file}",
+    "description": "Creates a detached signature for a hash manifest to prove it was not altered.",
+    "description_ar": "ينشئ توقيعًا منفصلًا لقائمة البصمات لإثبات أنها لم تُعدَّل.",
+    "params": [
+      {
+        "key": "hash_file",
+        "label": "Hash List File 📃",
+        "label_ar": "ملف قائمة البصمات (Hash) 📃",
+        "default": "/evidence/hashes.sha256"
+      }
+    ],
+    "tags": [
+      "gpg",
+      "signature",
+      "chain-of-custody"
+    ]
+  },
+  {
+    "id": "proc-ps-full",
+    "title": "List Processes With Start Times 📋",
+    "title_ar": "عرض العمليات مع أوقات بدئها 📋",
+    "category": "Processes & RAM 🧠",
+    "category_ar": "العمليات والذاكرة العشوائية (RAM) 🧠",
+    "command": "ps -eo pid,ppid,user,lstart,cmd --sort=start_time",
+    "description": "Lists every process with owner, parent, start time, and full command line sorted by start time.",
+    "description_ar": "يعرض كل عملية مع مالكها وعمليتها الأم وسطر أمرها الكامل مرتبة حسب وقت البدء.",
+    "params": [],
+    "tags": [
+      "ps",
+      "processes",
+      "starttime",
+      "cmdline"
+    ]
+  },
+  {
+    "id": "proc-top-batch",
+    "title": "Snapshot Top Resource Consumers 📈",
+    "title_ar": "لقطة لأكثر العمليات استهلاكًا للموارد 📈",
+    "category": "Processes & RAM 🧠",
+    "category_ar": "العمليات والذاكرة العشوائية (RAM) 🧠",
+    "command": "top -b -n 1 | head -n {count}",
+    "description": "Captures a one-time snapshot of CPU and memory usage by process.",
+    "description_ar": "يلتقط لقطة لمرة واحدة لاستهلاك المعالج والذاكرة لكل عملية.",
+    "params": [
+      {
+        "key": "count",
+        "label": "Line Count 🔢",
+        "label_ar": "عدد الأسطر 🔢",
+        "default": "50"
+      }
+    ],
+    "tags": [
+      "top",
+      "cpu",
+      "memory",
+      "snapshot"
+    ]
+  },
+  {
+    "id": "proc-pstree",
+    "title": "Process Tree With PIDs 🌲",
+    "title_ar": "شجرة العمليات مع المعرّفات 🌲",
+    "category": "Processes & RAM 🧠",
+    "category_ar": "العمليات والذاكرة العشوائية (RAM) 🧠",
+    "command": "pstree -aps",
+    "description": "Prints a compact process tree with PIDs and arguments.",
+    "description_ar": "يطبع شجرة مختصرة للعمليات مع معرّفاتها (PID) ووسائطها.",
+    "params": [],
+    "tags": [
+      "pstree",
+      "tree",
+      "pid"
+    ]
+  },
+  {
+    "id": "proc-proc-exe",
+    "title": "Resolve Process Executable Path 🧭",
+    "title_ar": "تحديد مسار ملف تنفيذ العملية 🧭",
+    "category": "Processes & RAM 🧠",
+    "category_ar": "العمليات والذاكرة العشوائية (RAM) 🧠",
+    "command": "ls -l /proc/{pid}/exe",
+    "description": "Shows the real path of the binary a process is running.",
+    "description_ar": "يعرض المسار الحقيقي للملف التنفيذي الذي تشغّله العملية.",
+    "params": [
+      {
+        "key": "pid",
+        "label": "Process ID (PID) 🔢",
+        "label_ar": "معرّف العملية (PID) 🔢",
+        "default": "1337"
+      }
+    ],
+    "tags": [
+      "proc",
+      "exe",
+      "path"
+    ]
+  },
+  {
+    "id": "proc-cmdline",
+    "title": "Read Process Command Line 💬",
+    "title_ar": "قراءة سطر أمر العملية 💬",
+    "category": "Processes & RAM 🧠",
+    "category_ar": "العمليات والذاكرة العشوائية (RAM) 🧠",
+    "command": "tr '\\0' ' ' < /proc/{pid}/cmdline; echo",
+    "description": "Prints the exact command line arguments a process was started with.",
+    "description_ar": "يطبع الوسائط الدقيقة التي بدأت بها العملية.",
+    "params": [
+      {
+        "key": "pid",
+        "label": "Process ID (PID) 🔢",
+        "label_ar": "معرّف العملية (PID) 🔢",
+        "default": "1337"
+      }
+    ],
+    "tags": [
+      "proc",
+      "cmdline",
+      "arguments"
+    ]
+  },
+  {
+    "id": "proc-environ",
+    "title": "Read Process Environment 🌿",
+    "title_ar": "قراءة متغيرات بيئة العملية 🌿",
+    "category": "Processes & RAM 🧠",
+    "category_ar": "العمليات والذاكرة العشوائية (RAM) 🧠",
+    "command": "tr '\\0' '\\n' < /proc/{pid}/environ",
+    "description": "Dumps the environment variables of a running process.",
+    "description_ar": "يستخرج متغيرات البيئة لعملية قيد التشغيل.",
+    "params": [
+      {
+        "key": "pid",
+        "label": "Process ID (PID) 🔢",
+        "label_ar": "معرّف العملية (PID) 🔢",
+        "default": "1337"
+      }
+    ],
+    "tags": [
+      "proc",
+      "environ",
+      "variables"
+    ]
+  },
+  {
+    "id": "proc-maps",
+    "title": "Show Process Memory Maps 🗺️",
+    "title_ar": "عرض خريطة ذاكرة العملية 🗺️",
+    "category": "Processes & RAM 🧠",
+    "category_ar": "العمليات والذاكرة العشوائية (RAM) 🧠",
+    "command": "cat /proc/{pid}/maps",
+    "description": "Lists mapped memory regions and loaded libraries, useful for spotting injected code.",
+    "description_ar": "يسرد مناطق الذاكرة والمكتبات المحمّلة، مما يفيد في كشف الشيفرة المحقونة.",
+    "params": [
+      {
+        "key": "pid",
+        "label": "Process ID (PID) 🔢",
+        "label_ar": "معرّف العملية (PID) 🔢",
+        "default": "1337"
+      }
+    ],
+    "tags": [
+      "proc",
+      "maps",
+      "memory",
+      "injection"
+    ]
+  },
+  {
+    "id": "proc-cwd",
+    "title": "Show Process Working Directory 📍",
+    "title_ar": "عرض مجلد العمل للعملية 📍",
+    "category": "Processes & RAM 🧠",
+    "category_ar": "العمليات والذاكرة العشوائية (RAM) 🧠",
+    "command": "ls -l /proc/{pid}/cwd",
+    "description": "Reveals the current working directory of a process.",
+    "description_ar": "يكشف المجلد الحالي الذي تعمل منه العملية.",
+    "params": [
+      {
+        "key": "pid",
+        "label": "Process ID (PID) 🔢",
+        "label_ar": "معرّف العملية (PID) 🔢",
+        "default": "1337"
+      }
+    ],
+    "tags": [
+      "proc",
+      "cwd",
+      "directory"
+    ]
+  },
+  {
+    "id": "proc-fd",
+    "title": "List Process File Descriptors 🔗",
+    "title_ar": "سرد واصفات ملفات العملية 🔗",
+    "category": "Processes & RAM 🧠",
+    "category_ar": "العمليات والذاكرة العشوائية (RAM) 🧠",
+    "command": "ls -l /proc/{pid}/fd",
+    "description": "Lists the files, pipes, and sockets opened by a process.",
+    "description_ar": "يسرد الملفات والأنابيب والمقابس التي فتحتها العملية.",
+    "params": [
+      {
+        "key": "pid",
+        "label": "Process ID (PID) 🔢",
+        "label_ar": "معرّف العملية (PID) 🔢",
+        "default": "1337"
+      }
+    ],
+    "tags": [
+      "proc",
+      "fd",
+      "descriptors"
+    ]
+  },
+  {
+    "id": "proc-deleted-bin",
+    "title": "Find Processes Running Deleted Binaries 👻",
+    "title_ar": "كشف عمليات تعمل من ملفات محذوفة 👻",
+    "category": "Processes & RAM 🧠",
+    "category_ar": "العمليات والذاكرة العشوائية (RAM) 🧠",
+    "command": "ls -l /proc/*/exe 2>/dev/null | grep deleted",
+    "description": "Detects processes whose executable has been deleted from disk, a common evasion sign.",
+    "description_ar": "يكتشف العمليات التي حُذف ملفها التنفيذي من القرص، وهي علامة شائعة على التخفي.",
+    "params": [],
+    "tags": [
+      "proc",
+      "deleted",
+      "fileless",
+      "evasion"
+    ]
+  },
+  {
+    "id": "proc-recover-deleted",
+    "title": "Recover Deleted Running Binary 🛟",
+    "title_ar": "استرجاع ملف تنفيذي محذوف قيد التشغيل 🛟",
+    "category": "Processes & RAM 🧠",
+    "category_ar": "العمليات والذاكرة العشوائية (RAM) 🧠",
+    "command": "cp /proc/{pid}/exe {output_dir}/recovered_{pid}.bin",
+    "description": "Copies the executable of a running process even if the file was deleted from disk.",
+    "description_ar": "ينسخ الملف التنفيذي لعملية جارية حتى لو حُذف من القرص.",
+    "params": [
+      {
+        "key": "pid",
+        "label": "Process ID (PID) 🔢",
+        "label_ar": "معرّف العملية (PID) 🔢",
+        "default": "1337"
+      },
+      {
+        "key": "output_dir",
+        "label": "Output Directory 📁",
+        "label_ar": "مجلد المخرجات 📁",
+        "default": "/evidence/output"
+      }
+    ],
+    "tags": [
+      "proc",
+      "recovery",
+      "deleted",
+      "binary"
+    ]
+  },
+  {
+    "id": "proc-status",
+    "title": "Read Process Status Details 🧾",
+    "title_ar": "قراءة حالة العملية التفصيلية 🧾",
+    "category": "Processes & RAM 🧠",
+    "category_ar": "العمليات والذاكرة العشوائية (RAM) 🧠",
+    "command": "cat /proc/{pid}/status",
+    "description": "Shows process state, UID/GID, memory usage, and capabilities.",
+    "description_ar": "يعرض حالة العملية ومعرّفات المستخدم والمجموعة واستهلاك الذاكرة والصلاحيات (Capabilities).",
+    "params": [
+      {
+        "key": "pid",
+        "label": "Process ID (PID) 🔢",
+        "label_ar": "معرّف العملية (PID) 🔢",
+        "default": "1337"
+      }
+    ],
+    "tags": [
+      "proc",
+      "status",
+      "uid",
+      "capabilities"
+    ]
+  },
+  {
+    "id": "proc-lsof-deleted",
+    "title": "List Deleted-but-Open Files 🕳️",
+    "title_ar": "الملفات المحذوفة التي ما زالت مفتوحة 🕳️",
+    "category": "Processes & RAM 🧠",
+    "category_ar": "العمليات والذاكرة العشوائية (RAM) 🧠",
+    "command": "lsof +L1",
+    "description": "Finds files that were unlinked but are still held open by running processes.",
+    "description_ar": "يجد الملفات التي أُزيلت من النظام لكنها ما زالت مفتوحة بواسطة عمليات جارية.",
+    "params": [],
+    "tags": [
+      "lsof",
+      "deleted",
+      "open",
+      "files"
+    ]
+  },
+  {
+    "id": "proc-lsof-user",
+    "title": "List Open Files by User 👥",
+    "title_ar": "الملفات المفتوحة حسب المستخدم 👥",
+    "category": "Processes & RAM 🧠",
+    "category_ar": "العمليات والذاكرة العشوائية (RAM) 🧠",
+    "command": "lsof -u {username}",
+    "description": "Shows all files and sockets opened by a specific user.",
+    "description_ar": "يعرض كل الملفات والمقابس التي فتحها مستخدم معيّن.",
+    "params": [
+      {
+        "key": "username",
+        "label": "Username 👤",
+        "label_ar": "اسم المستخدم 👤",
+        "default": "suspect"
+      }
+    ],
+    "tags": [
+      "lsof",
+      "user",
+      "files"
+    ]
+  },
+  {
+    "id": "proc-free-mem",
+    "title": "Check Memory Usage 🧮",
+    "title_ar": "فحص استهلاك الذاكرة 🧮",
+    "category": "Processes & RAM 🧠",
+    "category_ar": "العمليات والذاكرة العشوائية (RAM) 🧠",
+    "command": "free -h",
+    "description": "Shows total, used, and free RAM and swap.",
+    "description_ar": "يعرض إجمالي الذاكرة (RAM) والمستخدم والمتاح منها ومساحة التبديل (Swap).",
+    "params": [],
+    "tags": [
+      "free",
+      "memory",
+      "swap"
+    ]
+  },
+  {
+    "id": "proc-gcore",
+    "title": "Dump Process Memory With gcore 🧊",
+    "title_ar": "تفريغ ذاكرة عملية بأداة (gcore) 🧊",
+    "category": "Processes & RAM 🧠",
+    "category_ar": "العمليات والذاكرة العشوائية (RAM) 🧠",
+    "command": "gcore -o {output_dir}/proc_dump {pid}",
+    "description": "Creates a core dump of a running process for offline analysis.",
+    "description_ar": "ينشئ ملف تفريغ لعملية جارية لتحليله لاحقًا خارج الجهاز.",
+    "params": [
+      {
+        "key": "output_dir",
+        "label": "Output Directory 📁",
+        "label_ar": "مجلد المخرجات 📁",
+        "default": "/evidence/output"
+      },
+      {
+        "key": "pid",
+        "label": "Process ID (PID) 🔢",
+        "label_ar": "معرّف العملية (PID) 🔢",
+        "default": "1337"
+      }
+    ],
+    "tags": [
+      "gcore",
+      "memory",
+      "dump",
+      "process"
+    ]
+  },
+  {
+    "id": "proc-threads",
+    "title": "List Threads of a Process 🧵",
+    "title_ar": "سرد خيوط العملية 🧵",
+    "category": "Processes & RAM 🧠",
+    "category_ar": "العمليات والذاكرة العشوائية (RAM) 🧠",
+    "command": "ps -T -p {pid}",
+    "description": "Lists all threads belonging to the given process.",
+    "description_ar": "يسرد كل الخيوط (Threads) التابعة للعملية المحددة.",
+    "params": [
+      {
+        "key": "pid",
+        "label": "Process ID (PID) 🔢",
+        "label_ar": "معرّف العملية (PID) 🔢",
+        "default": "1337"
+      }
+    ],
+    "tags": [
+      "ps",
+      "threads",
+      "pid"
+    ]
+  },
+  {
+    "id": "proc-ps-user",
+    "title": "List Processes by User 🙋",
+    "title_ar": "عرض عمليات مستخدم معيّن 🙋",
+    "category": "Processes & RAM 🧠",
+    "category_ar": "العمليات والذاكرة العشوائية (RAM) 🧠",
+    "command": "ps -u {username} -o pid,ppid,etime,cmd",
+    "description": "Shows processes owned by a user along with elapsed running time.",
+    "description_ar": "يعرض العمليات التي يملكها مستخدم مع مدة تشغيلها.",
+    "params": [
+      {
+        "key": "username",
+        "label": "Username 👤",
+        "label_ar": "اسم المستخدم 👤",
+        "default": "suspect"
+      }
+    ],
+    "tags": [
+      "ps",
+      "user",
+      "processes"
+    ]
+  },
+  {
+    "id": "fs-ls-time",
+    "title": "List Files by Modification Time 🕰️",
+    "title_ar": "سرد الملفات حسب وقت التعديل 🕰️",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "ls -laht --time-style=full-iso {search_dir}",
+    "description": "Lists directory contents sorted by time with full-precision timestamps.",
+    "description_ar": "يسرد محتويات المجلد مرتبةً زمنيًا مع طوابع زمنية كاملة الدقة.",
+    "params": [
+      {
+        "key": "search_dir",
+        "label": "Search Directory 📂",
+        "label_ar": "مجلد البحث 📂",
+        "default": "/home"
+      }
+    ],
+    "tags": [
+      "ls",
+      "timestamps",
+      "sorting"
+    ]
+  },
+  {
+    "id": "fs-find-recent",
+    "title": "Find Recently Modified Files 🆕",
+    "title_ar": "البحث عن ملفات عُدّلت مؤخرًا 🆕",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "find {search_dir} -type f -mtime -{days} -ls",
+    "description": "Finds files modified within the last N days.",
+    "description_ar": "يجد الملفات التي عُدّلت خلال آخر عدد من الأيام.",
+    "params": [
+      {
+        "key": "search_dir",
+        "label": "Search Directory 📂",
+        "label_ar": "مجلد البحث 📂",
+        "default": "/home"
+      },
+      {
+        "key": "days",
+        "label": "Days Back ⏱️",
+        "label_ar": "عدد الأيام السابقة ⏱️",
+        "default": "7"
+      }
+    ],
+    "tags": [
+      "find",
+      "mtime",
+      "recent"
+    ]
+  },
+  {
+    "id": "fs-find-ctime",
+    "title": "Find Recently Changed Files (ctime) 🔄",
+    "title_ar": "البحث عن ملفات تغيّرت بياناتها الوصفية 🔄",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "find {search_dir} -type f -ctime -{days}",
+    "description": "Finds files whose metadata changed recently, which is harder to forge than mtime.",
+    "description_ar": "يجد الملفات التي تغيّرت بياناتها الوصفية حديثًا، وهي أصعب في التزوير من وقت التعديل (mtime).",
+    "params": [
+      {
+        "key": "search_dir",
+        "label": "Search Directory 📂",
+        "label_ar": "مجلد البحث 📂",
+        "default": "/home"
+      },
+      {
+        "key": "days",
+        "label": "Days Back ⏱️",
+        "label_ar": "عدد الأيام السابقة ⏱️",
+        "default": "7"
+      }
+    ],
+    "tags": [
+      "find",
+      "ctime",
+      "metadata"
+    ]
+  },
+  {
+    "id": "fs-find-suid",
+    "title": "Find SUID Binaries 🚨",
+    "title_ar": "البحث عن ملفات (SUID) 🚨",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "find / -perm -4000 -type f 2>/dev/null",
+    "description": "Lists files with the setuid bit set that may be abused for privilege escalation.",
+    "description_ar": "يسرد الملفات التي تحمل بت (setuid) وقد تُستغل لرفع الصلاحيات.",
+    "params": [],
+    "tags": [
+      "find",
+      "suid",
+      "privilege"
+    ]
+  },
+  {
+    "id": "fs-find-sgid",
+    "title": "Find SGID Binaries 🚨",
+    "title_ar": "البحث عن ملفات (SGID) 🚨",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "find / -perm -2000 -type f 2>/dev/null",
+    "description": "Lists files with the setgid bit set.",
+    "description_ar": "يسرد الملفات التي تحمل بت (setgid).",
+    "params": [],
+    "tags": [
+      "find",
+      "sgid",
+      "privilege"
+    ]
+  },
+  {
+    "id": "fs-find-world-writable",
+    "title": "Find World-Writable Files ✍️",
+    "title_ar": "البحث عن ملفات قابلة للكتابة من الجميع ✍️",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "find / -xdev -type f -perm -0002 2>/dev/null",
+    "description": "Finds files anyone can modify, a frequent persistence or tampering vector.",
+    "description_ar": "يجد ملفات يستطيع أي مستخدم تعديلها، وهي وسيلة متكررة للتخريب أو الاستمرارية.",
+    "params": [],
+    "tags": [
+      "find",
+      "permissions",
+      "writable"
+    ]
+  },
+  {
+    "id": "fs-find-nouser",
+    "title": "Find Files With No Owner 👤",
+    "title_ar": "البحث عن ملفات بلا مالك 👤",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "find / -xdev \\( -nouser -o -nogroup \\) 2>/dev/null",
+    "description": "Finds files whose owner or group no longer exists, often left by deleted accounts or dropped tools.",
+    "description_ar": "يجد ملفات لم يعد مالكها أو مجموعتها موجودًا، وغالبًا تتركها حسابات محذوفة أو أدوات مزروعة.",
+    "params": [],
+    "tags": [
+      "find",
+      "nouser",
+      "orphan"
+    ]
+  },
+  {
+    "id": "fs-find-hidden",
+    "title": "Find Hidden Files and Directories 🙈",
+    "title_ar": "البحث عن الملفات والمجلدات المخفية 🙈",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "find {search_dir} -name \".*\" -ls",
+    "description": "Lists dotfiles and hidden directories that may conceal attacker tooling.",
+    "description_ar": "يسرد الملفات المخفية (Dotfiles) التي قد تخبّئ أدوات المهاجم.",
+    "params": [
+      {
+        "key": "search_dir",
+        "label": "Search Directory 📂",
+        "label_ar": "مجلد البحث 📂",
+        "default": "/home"
+      }
+    ],
+    "tags": [
+      "find",
+      "hidden",
+      "dotfiles"
+    ]
+  },
+  {
+    "id": "fs-find-large",
+    "title": "Find Large Files 🐘",
+    "title_ar": "البحث عن الملفات الكبيرة 🐘",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "find {search_dir} -type f -size +{size} -exec ls -lh {} +",
+    "description": "Finds unusually large files that might be staged archives or data exfiltration packages.",
+    "description_ar": "يجد ملفات كبيرة بشكل غير معتاد قد تكون أرشيفات مجهّزة لتسريب البيانات.",
+    "params": [
+      {
+        "key": "search_dir",
+        "label": "Search Directory 📂",
+        "label_ar": "مجلد البحث 📂",
+        "default": "/home"
+      },
+      {
+        "key": "size",
+        "label": "Minimum Size 📏",
+        "label_ar": "الحد الأدنى للحجم 📏",
+        "default": "100M"
+      }
+    ],
+    "tags": [
+      "find",
+      "size",
+      "staging"
+    ]
+  },
+  {
+    "id": "fs-find-tmp-exec",
+    "title": "Find Executables in Temp Directories 🧨",
+    "title_ar": "البحث عن ملفات تنفيذية في المجلدات المؤقتة 🧨",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "find /tmp /var/tmp /dev/shm -type f -executable -ls 2>/dev/null",
+    "description": "Looks for executable files in world-writable temp locations.",
+    "description_ar": "يفتش عن ملفات قابلة للتنفيذ في مواقع مؤقتة يستطيع الجميع الكتابة فيها.",
+    "params": [],
+    "tags": [
+      "find",
+      "tmp",
+      "executable",
+      "dropper"
+    ]
+  },
+  {
+    "id": "fs-file-type",
+    "title": "Identify File Type 🧪",
+    "title_ar": "تحديد نوع الملف الحقيقي 🧪",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "file {file_path}",
+    "description": "Determines the true file type from magic bytes rather than the extension.",
+    "description_ar": "يحدد نوع الملف الفعلي من توقيعه الداخلي (Magic Bytes) لا من امتداده.",
+    "params": [
+      {
+        "key": "file_path",
+        "label": "Target File Path 🎯",
+        "label_ar": "مسار الملف المستهدف 🎯",
+        "default": "/home/user/malicious.sh"
+      }
+    ],
+    "tags": [
+      "file",
+      "magic",
+      "type"
+    ]
+  },
+  {
+    "id": "fs-exiftool",
+    "title": "Extract File Metadata (ExifTool) 🖼️",
+    "title_ar": "استخراج البيانات الوصفية (ExifTool) 🖼️",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "exiftool {file_path}",
+    "description": "Extracts embedded metadata such as author, device, GPS, and timestamps.",
+    "description_ar": "يستخرج البيانات الوصفية المضمّنة مثل المؤلف والجهاز وإحداثيات (GPS) والطوابع الزمنية.",
+    "params": [
+      {
+        "key": "file_path",
+        "label": "Target File Path 🎯",
+        "label_ar": "مسار الملف المستهدف 🎯",
+        "default": "/home/user/malicious.sh"
+      }
+    ],
+    "tags": [
+      "exiftool",
+      "metadata"
+    ]
+  },
+  {
+    "id": "fs-strings",
+    "title": "Extract Printable Strings 🔤",
+    "title_ar": "استخراج النصوص المقروءة 🔤",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "strings -a -n 8 {file_path}",
+    "description": "Pulls readable text from any file or binary for quick triage.",
+    "description_ar": "يسحب النصوص المقروءة من أي ملف أو برنامج للفرز السريع.",
+    "params": [
+      {
+        "key": "file_path",
+        "label": "Target File Path 🎯",
+        "label_ar": "مسار الملف المستهدف 🎯",
+        "default": "/home/user/malicious.sh"
+      }
+    ],
+    "tags": [
+      "strings",
+      "triage"
+    ]
+  },
+  {
+    "id": "fs-xxd",
+    "title": "Hex Dump File Header 🧬",
+    "title_ar": "تفريغ ترويسة الملف بالنظام السداسي عشري 🧬",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "xxd {file_path} | head -n 20",
+    "description": "Shows the first bytes of a file to verify its signature.",
+    "description_ar": "يعرض أولى بايتات الملف للتحقق من توقيعه.",
+    "params": [
+      {
+        "key": "file_path",
+        "label": "Target File Path 🎯",
+        "label_ar": "مسار الملف المستهدف 🎯",
+        "default": "/home/user/malicious.sh"
+      }
+    ],
+    "tags": [
+      "xxd",
+      "hex",
+      "header"
+    ]
+  },
+  {
+    "id": "fs-getfacl",
+    "title": "Show File ACLs 🛡️",
+    "title_ar": "عرض قوائم التحكم بالوصول (ACL) 🛡️",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "getfacl {file_path}",
+    "description": "Displays POSIX access control lists that go beyond standard permissions.",
+    "description_ar": "يعرض قوائم صلاحيات (POSIX ACL) التي تتجاوز الصلاحيات القياسية.",
+    "params": [
+      {
+        "key": "file_path",
+        "label": "Target File Path 🎯",
+        "label_ar": "مسار الملف المستهدف 🎯",
+        "default": "/home/user/malicious.sh"
+      }
+    ],
+    "tags": [
+      "getfacl",
+      "acl",
+      "permissions"
+    ]
+  },
+  {
+    "id": "fs-lsattr",
+    "title": "Show Extended File Attributes 🏷️",
+    "title_ar": "عرض السمات الموسّعة للملف 🏷️",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "lsattr {file_path}",
+    "description": "Shows attributes such as immutable or append-only that attackers may set.",
+    "description_ar": "يعرض سمات مثل الثبات (immutable) أو الإلحاق فقط (append-only) التي قد يضعها المهاجم.",
+    "params": [
+      {
+        "key": "file_path",
+        "label": "Target File Path 🎯",
+        "label_ar": "مسار الملف المستهدف 🎯",
+        "default": "/home/user/malicious.sh"
+      }
+    ],
+    "tags": [
+      "lsattr",
+      "attributes",
+      "immutable"
+    ]
+  },
+  {
+    "id": "fs-debugfs-inode",
+    "title": "Inspect Inode With debugfs 🧰",
+    "title_ar": "فحص عقدة ملف بأداة (debugfs) 🧰",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "debugfs -R \"stat <{inode}>\" {partition}",
+    "description": "Reads detailed ext inode data, including deletion time, without mounting.",
+    "description_ar": "يقرأ بيانات (inode) التفصيلية في (ext) ومنها وقت الحذف دون ربط القسم.",
+    "params": [
+      {
+        "key": "inode",
+        "label": "Inode Number 🔢",
+        "label_ar": "رقم العقدة (Inode) 🔢",
+        "default": "12345"
+      },
+      {
+        "key": "partition",
+        "label": "Partition 🧩",
+        "label_ar": "القسم (Partition) 🧩",
+        "default": "/dev/sdb1"
+      }
+    ],
+    "tags": [
+      "debugfs",
+      "inode",
+      "ext4"
+    ]
+  },
+  {
+    "id": "fs-grep-keyword",
+    "title": "Search Files for Keyword 🔎",
+    "title_ar": "البحث عن كلمة داخل الملفات 🔎",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "grep -rIl \"{keyword}\" {search_dir} 2>/dev/null",
+    "description": "Recursively finds text files containing a keyword.",
+    "description_ar": "يبحث تكراريًا عن الملفات النصية التي تحتوي كلمة مفتاحية.",
+    "params": [
+      {
+        "key": "keyword",
+        "label": "Keyword 🔎",
+        "label_ar": "الكلمة المفتاحية 🔎",
+        "default": "password"
+      },
+      {
+        "key": "search_dir",
+        "label": "Search Directory 📂",
+        "label_ar": "مجلد البحث 📂",
+        "default": "/home"
+      }
+    ],
+    "tags": [
+      "grep",
+      "search",
+      "keyword"
+    ]
+  },
+  {
+    "id": "fs-trash",
+    "title": "Inspect User Trash Contents 🗑️",
+    "title_ar": "فحص محتويات سلة المهملات للمستخدم 🗑️",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "ls -laR /home/{username}/.local/share/Trash/",
+    "description": "Lists files a user deleted through the desktop trash.",
+    "description_ar": "يسرد الملفات التي حذفها المستخدم عبر سلة مهملات سطح المكتب.",
+    "params": [
+      {
+        "key": "username",
+        "label": "Username 👤",
+        "label_ar": "اسم المستخدم 👤",
+        "default": "suspect"
+      }
+    ],
+    "tags": [
+      "trash",
+      "deleted",
+      "user"
+    ]
+  },
+  {
+    "id": "fs-recent-docs",
+    "title": "Browse Recently Used Files 📑",
+    "title_ar": "تصفح الملفات المستخدمة مؤخرًا 📑",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "cat /home/{username}/.local/share/recently-used.xbel",
+    "description": "Shows the desktop's record of recently opened documents.",
+    "description_ar": "يعرض سجل سطح المكتب للمستندات التي فُتحت حديثًا.",
+    "params": [
+      {
+        "key": "username",
+        "label": "Username 👤",
+        "label_ar": "اسم المستخدم 👤",
+        "default": "suspect"
+      }
+    ],
+    "tags": [
+      "recent",
+      "documents",
+      "xbel"
+    ]
+  },
+  {
+    "id": "fs-thumbnails",
+    "title": "List Cached Thumbnails 🖼️",
+    "title_ar": "سرد الصور المصغّرة المخزنة 🖼️",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "ls -la /home/{username}/.cache/thumbnails/",
+    "description": "Thumbnail caches can prove an image existed even after the original was removed.",
+    "description_ar": "قد تثبت الصور المصغّرة (Thumbnails) وجود صورة حتى بعد حذف أصلها.",
+    "params": [
+      {
+        "key": "username",
+        "label": "Username 👤",
+        "label_ar": "اسم المستخدم 👤",
+        "default": "suspect"
+      }
+    ],
+    "tags": [
+      "thumbnails",
+      "cache",
+      "images"
+    ]
+  },
+  {
+    "id": "fs-firefox-find",
+    "title": "Locate Firefox History Database 🦊",
+    "title_ar": "تحديد قاعدة سجل (Firefox) 🦊",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "find /home/{username}/.mozilla/firefox -name \"places.sqlite\"",
+    "description": "Finds the Firefox browsing history database for a user.",
+    "description_ar": "يجد قاعدة بيانات سجل التصفح الخاصة بمتصفح (Firefox) لمستخدم معيّن.",
+    "params": [
+      {
+        "key": "username",
+        "label": "Username 👤",
+        "label_ar": "اسم المستخدم 👤",
+        "default": "suspect"
+      }
+    ],
+    "tags": [
+      "firefox",
+      "browser",
+      "history"
+    ]
+  },
+  {
+    "id": "fs-sqlite-firefox",
+    "title": "Query Firefox Visited URLs 🌐",
+    "title_ar": "استعلام الروابط المزارة في (Firefox) 🌐",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "sqlite3 -readonly {db_file} \"SELECT url, datetime(last_visit_date/1000000,'unixepoch') FROM moz_places ORDER BY last_visit_date DESC LIMIT 50;\"",
+    "description": "Lists the most recently visited URLs from a Firefox history database.",
+    "description_ar": "يسرد أحدث الروابط التي زارها المستخدم من قاعدة سجل (Firefox).",
+    "params": [
+      {
+        "key": "db_file",
+        "label": "SQLite DB File 🗃️",
+        "label_ar": "ملف قاعدة بيانات (SQLite) 🗃️",
+        "default": "/evidence/places.sqlite"
+      }
+    ],
+    "tags": [
+      "sqlite",
+      "firefox",
+      "urls"
+    ]
+  },
+  {
+    "id": "fs-sqlite-chrome",
+    "title": "Query Chrome Download History ⬇️",
+    "title_ar": "استعلام سجل التنزيلات في (Chrome) ⬇️",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "sqlite3 -readonly {db_file} \"SELECT target_path, tab_url FROM downloads;\"",
+    "description": "Lists downloaded files and their source pages from a Chromium history database.",
+    "description_ar": "يسرد الملفات المنزّلة وصفحات مصدرها من قاعدة سجل (Chromium).",
+    "params": [
+      {
+        "key": "db_file",
+        "label": "SQLite DB File 🗃️",
+        "label_ar": "ملف قاعدة بيانات (SQLite) 🗃️",
+        "default": "/evidence/places.sqlite"
+      }
+    ],
+    "tags": [
+      "sqlite",
+      "chrome",
+      "downloads"
+    ]
+  },
+  {
+    "id": "fs-df",
+    "title": "Show Mounted Filesystem Usage 🧱",
+    "title_ar": "عرض استخدام أنظمة الملفات المربوطة 🧱",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "df -hT",
+    "description": "Shows mounted filesystems with type and usage.",
+    "description_ar": "يعرض أنظمة الملفات المربوطة مع نوعها ونسبة استخدامها.",
+    "params": [],
+    "tags": [
+      "df",
+      "mounts",
+      "usage"
+    ]
+  },
+  {
+    "id": "fs-findmnt",
+    "title": "List Mounted Filesystems 🌳",
+    "title_ar": "سرد نقاط الربط 🌳",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "findmnt -A",
+    "description": "Displays all mounts in a tree, helping to spot unusual or hidden mounts.",
+    "description_ar": "يعرض كل عمليات الربط (Mounts) على شكل شجرة لاكتشاف أي ربط غريب أو مخفي.",
+    "params": [],
+    "tags": [
+      "findmnt",
+      "mounts",
+      "tree"
+    ]
+  },
+  {
+    "id": "fs-tsk-recover",
+    "title": "Recover Deleted Files (tsk_recover) ♻️",
+    "title_ar": "استرجاع الملفات المحذوفة (tsk_recover) ♻️",
+    "category": "File System & Artifacts 📜",
+    "category_ar": "نظام الملفات والآثار الرقمية (Artifacts) 📜",
+    "command": "tsk_recover -e -o {sector_offset} {image_path} {output_dir}/recovered",
+    "description": "Extracts allocated and unallocated files from an image into a directory.",
+    "description_ar": "يستخرج الملفات المخصصة وغير المخصصة من الصورة إلى مجلد.",
+    "params": [
+      {
+        "key": "sector_offset",
+        "label": "Sector Offset 🧮",
+        "label_ar": "إزاحة القطاع (Sector Offset) 🧮",
+        "default": "2048"
+      },
+      {
+        "key": "image_path",
+        "label": "Evidence File Path 📄",
+        "label_ar": "مسار ملف الدليل 📄",
+        "default": "/evidence/disk.img"
+      },
+      {
+        "key": "output_dir",
+        "label": "Output Directory 📁",
+        "label_ar": "مجلد المخرجات 📁",
+        "default": "/evidence/output"
+      }
+    ],
+    "tags": [
+      "tsk_recover",
+      "deleted",
+      "recovery"
+    ]
+  },
+  {
+    "id": "net-netstat",
+    "title": "Legacy Connection Listing 🔌",
+    "title_ar": "سرد الاتصالات بالأداة القديمة (netstat) 🔌",
+    "category": "Network Forensics 📡",
+    "category_ar": "التحقيق في الشبكات (Network Forensics) 📡",
+    "command": "netstat -antup",
+    "description": "Lists all TCP/UDP sockets with numeric addresses and owning processes on older systems.",
+    "description_ar": "يسرد كل مقابس (TCP/UDP) بعناوين رقمية والعمليات المالكة لها على الأنظمة الأقدم.",
+    "params": [],
+    "tags": [
+      "netstat",
+      "sockets",
+      "legacy"
+    ]
+  },
+  {
+    "id": "net-established",
+    "title": "List Established Connections 🔗",
+    "title_ar": "سرد الاتصالات القائمة 🔗",
+    "category": "Network Forensics 📡",
+    "category_ar": "التحقيق في الشبكات (Network Forensics) 📡",
+    "command": "ss -tnp state established",
+    "description": "Shows currently established TCP connections with process info.",
+    "description_ar": "يعرض اتصالات (TCP) القائمة حاليًا مع معلومات العمليات.",
+    "params": [],
+    "tags": [
+      "ss",
+      "established",
+      "connections"
+    ]
+  },
+  {
+    "id": "net-ip-addr",
+    "title": "Show Network Interfaces 🧭",
+    "title_ar": "عرض واجهات الشبكة 🧭",
+    "category": "Network Forensics 📡",
+    "category_ar": "التحقيق في الشبكات (Network Forensics) 📡",
+    "command": "ip -br addr",
+    "description": "Prints a brief summary of interfaces and assigned IP addresses.",
+    "description_ar": "يطبع ملخصًا موجزًا للواجهات وعناوين (IP) المسندة إليها.",
+    "params": [],
+    "tags": [
+      "ip",
+      "interfaces",
+      "addresses"
+    ]
+  },
+  {
+    "id": "net-ip-route",
+    "title": "Show Routing Table 🛣️",
+    "title_ar": "عرض جدول التوجيه 🛣️",
+    "category": "Network Forensics 📡",
+    "category_ar": "التحقيق في الشبكات (Network Forensics) 📡",
+    "command": "ip route show",
+    "description": "Displays routing entries, useful for spotting rogue gateways.",
+    "description_ar": "يعرض مدخلات التوجيه (Routing)، وهو مفيد لاكتشاف بوابات مشبوهة.",
+    "params": [],
+    "tags": [
+      "ip",
+      "route",
+      "gateway"
+    ]
+  },
+  {
+    "id": "net-arp",
+    "title": "Show ARP Neighbor Cache 🧲",
+    "title_ar": "عرض ذاكرة (ARP) المؤقتة 🧲",
+    "category": "Network Forensics 📡",
+    "category_ar": "التحقيق في الشبكات (Network Forensics) 📡",
+    "command": "ip neigh show",
+    "description": "Lists recently seen hosts on the local network.",
+    "description_ar": "يسرد الأجهزة التي ظهرت مؤخرًا على الشبكة المحلية.",
+    "params": [],
+    "tags": [
+      "arp",
+      "neighbors",
+      "lan"
+    ]
+  },
+  {
+    "id": "net-resolv",
+    "title": "Check DNS Resolver Config 🧾",
+    "title_ar": "فحص إعدادات (DNS) 🧾",
+    "category": "Network Forensics 📡",
+    "category_ar": "التحقيق في الشبكات (Network Forensics) 📡",
+    "command": "cat /etc/resolv.conf",
+    "description": "Shows configured DNS servers to detect resolver hijacking.",
+    "description_ar": "يعرض خوادم (DNS) المضبوطة لكشف أي اختطاف للمحلِّل.",
+    "params": [],
+    "tags": [
+      "dns",
+      "resolver",
+      "config"
+    ]
+  },
+  {
+    "id": "net-hosts",
+    "title": "Inspect Hosts File for Tampering ✏️",
+    "title_ar": "فحص ملف (hosts) بحثًا عن عبث ✏️",
+    "category": "Network Forensics 📡",
+    "category_ar": "التحقيق في الشبكات (Network Forensics) 📡",
+    "command": "cat /etc/hosts",
+    "description": "Looks for malicious hostname overrides.",
+    "description_ar": "يبحث عن تعديلات خبيثة تعيد توجيه أسماء المضيفين.",
+    "params": [],
+    "tags": [
+      "hosts",
+      "dns",
+      "tampering"
+    ]
+  },
+  {
+    "id": "net-lsof-port",
+    "title": "Find Process Using a Port 🔦",
+    "title_ar": "معرفة العملية التي تستخدم منفذًا 🔦",
+    "category": "Network Forensics 📡",
+    "category_ar": "التحقيق في الشبكات (Network Forensics) 📡",
+    "command": "lsof -i :{port}",
+    "description": "Identifies the process bound to or connected through a specific port.",
+    "description_ar": "يحدد العملية المرتبطة بمنفذ معيّن أو المتصلة عبره.",
+    "params": [
+      {
+        "key": "port",
+        "label": "Port Number 🔌",
+        "label_ar": "رقم المنفذ (Port) 🔌",
+        "default": "4444"
+      }
+    ],
+    "tags": [
+      "lsof",
+      "port",
+      "process"
+    ]
+  },
+  {
+    "id": "net-lsof-inet",
+    "title": "List All Network Files 🌐",
+    "title_ar": "سرد كل الملفات الشبكية 🌐",
+    "category": "Network Forensics 📡",
+    "category_ar": "التحقيق في الشبكات (Network Forensics) 📡",
+    "command": "lsof -i -n -P",
+    "description": "Lists all open network sockets with numeric hosts and ports.",
+    "description_ar": "يسرد كل المقابس الشبكية المفتوحة بعناوين ومنافذ رقمية.",
+    "params": [],
+    "tags": [
+      "lsof",
+      "network",
+      "sockets"
+    ]
+  },
+  {
+    "id": "net-tcpdump-capture",
+    "title": "Capture Traffic to PCAP 🎥",
+    "title_ar": "التقاط حركة الشبكة إلى ملف (PCAP) 🎥",
+    "category": "Network Forensics 📡",
+    "category_ar": "التحقيق في الشبكات (Network Forensics) 📡",
+    "command": "tcpdump -i {interface} -w {pcap_file} -s 0",
+    "description": "Captures full packets from an interface into a PCAP file.",
+    "description_ar": "يلتقط الحزم كاملة من واجهة شبكة ويحفظها في ملف (PCAP).",
+    "params": [
+      {
+        "key": "interface",
+        "label": "Network Interface 🖧",
+        "label_ar": "واجهة الشبكة (Interface) 🖧",
+        "default": "eth0"
+      },
+      {
+        "key": "pcap_file",
+        "label": "PCAP File 📦",
+        "label_ar": "ملف التقاط الشبكة (PCAP) 📦",
+        "default": "/evidence/capture.pcap"
+      }
+    ],
+    "tags": [
+      "tcpdump",
+      "capture",
+      "pcap"
+    ]
+  },
+  {
+    "id": "net-tcpdump-host",
+    "title": "Capture Traffic for One Host 🎯",
+    "title_ar": "التقاط حركة جهاز واحد 🎯",
+    "category": "Network Forensics 📡",
+    "category_ar": "التحقيق في الشبكات (Network Forensics) 📡",
+    "command": "tcpdump -i {interface} host {ip_addr} -w {pcap_file}",
+    "description": "Captures only traffic to or from a specific host.",
+    "description_ar": "يلتقط فقط الحركة الصادرة من جهاز محدد أو الواردة إليه.",
+    "params": [
+      {
+        "key": "interface",
+        "label": "Network Interface 🖧",
+        "label_ar": "واجهة الشبكة (Interface) 🖧",
+        "default": "eth0"
+      },
+      {
+        "key": "ip_addr",
+        "label": "IP Address 🌐",
+        "label_ar": "عنوان (IP) 🌐",
+        "default": "192.168.1.100"
+      },
+      {
+        "key": "pcap_file",
+        "label": "PCAP File 📦",
+        "label_ar": "ملف التقاط الشبكة (PCAP) 📦",
+        "default": "/evidence/capture.pcap"
+      }
+    ],
+    "tags": [
+      "tcpdump",
+      "host",
+      "filter"
+    ]
+  },
+  {
+    "id": "net-tcpdump-read",
+    "title": "Read PCAP Summary 📖",
+    "title_ar": "قراءة ملخص ملف (PCAP) 📖",
+    "category": "Network Forensics 📡",
+    "category_ar": "التحقيق في الشبكات (Network Forensics) 📡",
+    "command": "tcpdump -nn -r {pcap_file} | head -n {count}",
+    "description": "Prints the first packets of a capture without name resolution.",
+    "description_ar": "يطبع أولى الحزم في ملف التقاط دون تحويل الأسماء.",
+    "params": [
+      {
+        "key": "pcap_file",
+        "label": "PCAP File 📦",
+        "label_ar": "ملف التقاط الشبكة (PCAP) 📦",
+        "default": "/evidence/capture.pcap"
+      },
+      {
+        "key": "count",
+        "label": "Line Count 🔢",
+        "label_ar": "عدد الأسطر 🔢",
+        "default": "50"
+      }
+    ],
+    "tags": [
+      "tcpdump",
+      "pcap",
+      "read"
+    ]
+  },
+  {
+    "id": "net-tshark-conv",
+    "title": "Summarize PCAP Conversations 💬",
+    "title_ar": "تلخيص محادثات (PCAP) 💬",
+    "category": "Network Forensics 📡",
+    "category_ar": "التحقيق في الشبكات (Network Forensics) 📡",
+    "command": "tshark -r {pcap_file} -q -z conv,ip",
+    "description": "Lists IP conversations with byte and packet counts.",
+    "description_ar": "يسرد محادثات (IP) مع عدد البايتات والحزم.",
+    "params": [
+      {
+        "key": "pcap_file",
+        "label": "PCAP File 📦",
+        "label_ar": "ملف التقاط الشبكة (PCAP) 📦",
+        "default": "/evidence/capture.pcap"
+      }
+    ],
+    "tags": [
+      "tshark",
+      "conversations",
+      "pcap"
+    ]
+  },
+  {
+    "id": "net-tshark-dns",
+    "title": "Extract DNS Queries From PCAP 🌍",
+    "title_ar": "استخراج استعلامات (DNS) من (PCAP) 🌍",
+    "category": "Network Forensics 📡",
+    "category_ar": "التحقيق في الشبكات (Network Forensics) 📡",
+    "command": "tshark -r {pcap_file} -Y dns.flags.response==0 -T fields -e ip.src -e dns.qry.name",
+    "description": "Lists the domain names clients asked to resolve.",
+    "description_ar": "يسرد أسماء النطاقات التي طلبت الأجهزة حلّها.",
+    "params": [
+      {
+        "key": "pcap_file",
+        "label": "PCAP File 📦",
+        "label_ar": "ملف التقاط الشبكة (PCAP) 📦",
+        "default": "/evidence/capture.pcap"
+      }
+    ],
+    "tags": [
+      "tshark",
+      "dns",
+      "queries"
+    ]
+  },
+  {
+    "id": "net-tshark-http",
+    "title": "Extract HTTP Requests From PCAP 🕸️",
+    "title_ar": "استخراج طلبات (HTTP) من (PCAP) 🕸️",
+    "category": "Network Forensics 📡",
+    "category_ar": "التحقيق في الشبكات (Network Forensics) 📡",
+    "command": "tshark -r {pcap_file} -Y http.request -T fields -e ip.src -e http.host -e http.request.uri",
+    "description": "Lists HTTP hosts and URIs requested in a capture.",
+    "description_ar": "يسرد المضيفين والمسارات المطلوبة عبر (HTTP) داخل الالتقاط.",
+    "params": [
+      {
+        "key": "pcap_file",
+        "label": "PCAP File 📦",
+        "label_ar": "ملف التقاط الشبكة (PCAP) 📦",
+        "default": "/evidence/capture.pcap"
+      }
+    ],
+    "tags": [
+      "tshark",
+      "http",
+      "requests"
+    ]
+  },
+  {
+    "id": "net-tshark-export",
+    "title": "Export HTTP Objects From PCAP 📤",
+    "title_ar": "تصدير ملفات (HTTP) من (PCAP) 📤",
+    "category": "Network Forensics 📡",
+    "category_ar": "التحقيق في الشبكات (Network Forensics) 📡",
+    "command": "tshark -r {pcap_file} --export-objects http,{output_dir}/http_objects",
+    "description": "Carves files transferred over HTTP out of a capture.",
+    "description_ar": "يستخرج الملفات التي نُقلت عبر (HTTP) من ملف الالتقاط (File Carving).",
+    "params": [
+      {
+        "key": "pcap_file",
+        "label": "PCAP File 📦",
+        "label_ar": "ملف التقاط الشبكة (PCAP) 📦",
+        "default": "/evidence/capture.pcap"
+      },
+      {
+        "key": "output_dir",
+        "label": "Output Directory 📁",
+        "label_ar": "مجلد المخرجات 📁",
+        "default": "/evidence/output"
+      }
+    ],
+    "tags": [
+      "tshark",
+      "http",
+      "export",
+      "carving"
+    ]
+  },
+  {
+    "id": "net-tshark-proto",
+    "title": "Protocol Hierarchy Statistics 📊",
+    "title_ar": "إحصاءات هرم البروتوكولات 📊",
+    "category": "Network Forensics 📡",
+    "category_ar": "التحقيق في الشبكات (Network Forensics) 📡",
+    "command": "tshark -r {pcap_file} -q -z io,phs",
+    "description": "Shows which protocols dominate a capture.",
+    "description_ar": "يوضح البروتوكولات الغالبة في الالتقاط.",
+    "params": [
+      {
+        "key": "pcap_file",
+        "label": "PCAP File 📦",
+        "label_ar": "ملف التقاط الشبكة (PCAP) 📦",
+        "default": "/evidence/capture.pcap"
+      }
+    ],
+    "tags": [
+      "tshark",
+      "protocols",
+      "statistics"
+    ]
+  },
+  {
+    "id": "net-capinfos",
+    "title": "PCAP File Details ℹ️",
+    "title_ar": "تفاصيل ملف (PCAP) ℹ️",
+    "category": "Network Forensics 📡",
+    "category_ar": "التحقيق في الشبكات (Network Forensics) 📡",
+    "command": "capinfos {pcap_file}",
+    "description": "Reports capture duration, packet count, and hash of a PCAP.",
+    "description_ar": "يعرض مدة الالتقاط وعدد الحزم وبصمة ملف (PCAP).",
+    "params": [
+      {
+        "key": "pcap_file",
+        "label": "PCAP File 📦",
+        "label_ar": "ملف التقاط الشبكة (PCAP) 📦",
+        "default": "/evidence/capture.pcap"
+      }
+    ],
+    "tags": [
+      "capinfos",
+      "pcap",
+      "metadata"
+    ]
+  },
+  {
+    "id": "net-ngrep",
+    "title": "Search Packet Payloads 🔍",
+    "title_ar": "البحث في محتوى الحزم 🔍",
+    "category": "Network Forensics 📡",
+    "category_ar": "التحقيق في الشبكات (Network Forensics) 📡",
+    "command": "ngrep -I {pcap_file} -q \"{keyword}\"",
+    "description": "Searches packet contents in a capture for a string or regex.",
+    "description_ar": "يبحث في محتوى الحزم داخل الالتقاط عن نص أو تعبير نمطي (Regex).",
+    "params": [
+      {
+        "key": "pcap_file",
+        "label": "PCAP File 📦",
+        "label_ar": "ملف التقاط الشبكة (PCAP) 📦",
+        "default": "/evidence/capture.pcap"
+      },
+      {
+        "key": "keyword",
+        "label": "Keyword 🔎",
+        "label_ar": "الكلمة المفتاحية 🔎",
+        "default": "password"
+      }
+    ],
+    "tags": [
+      "ngrep",
+      "payload",
+      "search"
+    ]
+  },
+  {
+    "id": "net-iptables",
+    "title": "Dump Firewall Rules (iptables) 🔥",
+    "title_ar": "عرض قواعد جدار الحماية (iptables) 🔥",
+    "category": "Network Forensics 📡",
+    "category_ar": "التحقيق في الشبكات (Network Forensics) 📡",
+    "command": "iptables -L -n -v --line-numbers",
+    "description": "Shows firewall rules and packet counters for unexpected allow or redirect entries.",
+    "description_ar": "يعرض قواعد جدار الحماية وعدّادات الحزم بحثًا عن قواعد سماح أو إعادة توجيه غير متوقعة.",
+    "params": [],
+    "tags": [
+      "iptables",
+      "firewall",
+      "rules"
+    ]
+  },
+  {
+    "id": "net-nft",
+    "title": "Dump Firewall Rules (nftables) 🔥",
+    "title_ar": "عرض قواعد جدار الحماية (nftables) 🔥",
+    "category": "Network Forensics 📡",
+    "category_ar": "التحقيق في الشبكات (Network Forensics) 📡",
+    "command": "nft list ruleset",
+    "description": "Lists the complete nftables ruleset.",
+    "description_ar": "يسرد مجموعة قواعد (nftables) كاملة.",
+    "params": [],
+    "tags": [
+      "nft",
+      "firewall",
+      "ruleset"
+    ]
+  },
+  {
+    "id": "logs-journal-since",
+    "title": "Query Journal by Time Range 🗓️",
+    "title_ar": "استعلام السجل ضمن نطاق زمني 🗓️",
+    "category": "System Logs & History 📑",
+    "category_ar": "سجلات النظام والتاريخ (Logs) 📑",
+    "command": "journalctl --since \"{date_start}\" --until \"{date_end}\" --no-pager",
+    "description": "Extracts systemd journal entries within an incident window.",
+    "description_ar": "يستخرج مدخلات سجل (systemd journal) خلال فترة الحادثة.",
+    "params": [
+      {
+        "key": "date_start",
+        "label": "Start Date 📅",
+        "label_ar": "تاريخ البداية 📅",
+        "default": "2026-09-01 00:00:00"
+      },
+      {
+        "key": "date_end",
+        "label": "End Date 📅",
+        "label_ar": "تاريخ النهاية 📅",
+        "default": "2026-10-01 00:00:00"
+      }
+    ],
+    "tags": [
+      "journalctl",
+      "time",
+      "range"
+    ]
+  },
+  {
+    "id": "logs-journal-unit",
+    "title": "Show Journal for a Service ⚙️",
+    "title_ar": "عرض سجل خدمة معيّنة ⚙️",
+    "category": "System Logs & History 📑",
+    "category_ar": "سجلات النظام والتاريخ (Logs) 📑",
+    "command": "journalctl -u {service} --no-pager",
+    "description": "Displays logs for a single systemd unit.",
+    "description_ar": "يعرض سجلات وحدة (systemd) واحدة.",
+    "params": [
+      {
+        "key": "service",
+        "label": "Service Name ⚙️",
+        "label_ar": "اسم الخدمة (Service) ⚙️",
+        "default": "ssh"
+      }
+    ],
+    "tags": [
+      "journalctl",
+      "service",
+      "unit"
+    ]
+  },
+  {
+    "id": "logs-journal-boots",
+    "title": "List Recorded Boots 🥾",
+    "title_ar": "سرد مرات الإقلاع المسجّلة 🥾",
+    "category": "System Logs & History 📑",
+    "category_ar": "سجلات النظام والتاريخ (Logs) 📑",
+    "command": "journalctl --list-boots",
+    "description": "Lists boot sessions in the journal to reveal unexpected reboots.",
+    "description_ar": "يسرد جلسات الإقلاع في السجل لكشف أي إعادة تشغيل غير متوقعة.",
+    "params": [],
+    "tags": [
+      "journalctl",
+      "boots",
+      "reboot"
+    ]
+  },
+  {
+    "id": "logs-journal-errors",
+    "title": "Show Error-Level Journal Entries ❌",
+    "title_ar": "عرض مدخلات الأخطاء في السجل ❌",
+    "category": "System Logs & History 📑",
+    "category_ar": "سجلات النظام والتاريخ (Logs) 📑",
+    "command": "journalctl -p err -b --no-pager",
+    "description": "Shows error and higher severity messages from the current boot.",
+    "description_ar": "يعرض الرسائل ذات مستوى الخطأ فما فوق منذ آخر إقلاع.",
+    "params": [],
+    "tags": [
+      "journalctl",
+      "errors",
+      "priority"
+    ]
+  },
+  {
+    "id": "logs-auth-failed",
+    "title": "Find Failed SSH Logins 🚫",
+    "title_ar": "البحث عن محاولات دخول (SSH) فاشلة 🚫",
+    "category": "System Logs & History 📑",
+    "category_ar": "سجلات النظام والتاريخ (Logs) 📑",
+    "command": "grep \"Failed password\" {log_file}",
+    "description": "Finds failed password attempts that may indicate brute-forcing.",
+    "description_ar": "يجد محاولات كلمات المرور الفاشلة التي قد تدل على هجوم تخمين.",
+    "params": [
+      {
+        "key": "log_file",
+        "label": "Log File 📝",
+        "label_ar": "ملف السجل (Log) 📝",
+        "default": "/var/log/auth.log"
+      }
+    ],
+    "tags": [
+      "auth",
+      "failed",
+      "ssh",
+      "bruteforce"
+    ]
+  },
+  {
+    "id": "logs-auth-accepted",
+    "title": "Find Successful Logins ✅",
+    "title_ar": "البحث عن عمليات الدخول الناجحة ✅",
+    "category": "System Logs & History 📑",
+    "category_ar": "سجلات النظام والتاريخ (Logs) 📑",
+    "command": "grep \"Accepted\" {log_file}",
+    "description": "Lists successful SSH authentications with source IPs.",
+    "description_ar": "يسرد عمليات المصادقة الناجحة عبر (SSH) مع عناوين المصدر.",
+    "params": [
+      {
+        "key": "log_file",
+        "label": "Log File 📝",
+        "label_ar": "ملف السجل (Log) 📝",
+        "default": "/var/log/auth.log"
+      }
+    ],
+    "tags": [
+      "auth",
+      "accepted",
+      "ssh"
+    ]
+  },
+  {
+    "id": "logs-lastb",
+    "title": "Show Failed Login Records 📛",
+    "title_ar": "عرض سجلات الدخول الفاشلة 📛",
+    "category": "System Logs & History 📑",
+    "category_ar": "سجلات النظام والتاريخ (Logs) 📑",
+    "command": "lastb -f /var/log/btmp",
+    "description": "Parses the binary log of failed login attempts.",
+    "description_ar": "يحلل السجل الثنائي لمحاولات الدخول الفاشلة.",
+    "params": [],
+    "tags": [
+      "lastb",
+      "btmp",
+      "failed"
+    ]
+  },
+  {
+    "id": "logs-lastlog",
+    "title": "Show Last Login per Account 🕘",
+    "title_ar": "عرض آخر دخول لكل حساب 🕘",
+    "category": "System Logs & History 📑",
+    "category_ar": "سجلات النظام والتاريخ (Logs) 📑",
+    "command": "lastlog",
+    "description": "Reports the most recent login for each account, exposing dormant account use.",
+    "description_ar": "يعرض أحدث دخول لكل حساب، مما يكشف استخدام الحسابات الخاملة.",
+    "params": [],
+    "tags": [
+      "lastlog",
+      "accounts"
+    ]
+  },
+  {
+    "id": "logs-sudo",
+    "title": "Find Sudo Usage 🦸",
+    "title_ar": "البحث عن استخدام (sudo) 🦸",
+    "category": "System Logs & History 📑",
+    "category_ar": "سجلات النظام والتاريخ (Logs) 📑",
+    "command": "grep \"sudo:\" {log_file}",
+    "description": "Lists privilege escalation commands run through sudo.",
+    "description_ar": "يسرد أوامر رفع الصلاحيات التي نُفذت عبر (sudo).",
+    "params": [
+      {
+        "key": "log_file",
+        "label": "Log File 📝",
+        "label_ar": "ملف السجل (Log) 📝",
+        "default": "/var/log/auth.log"
+      }
+    ],
+    "tags": [
+      "sudo",
+      "privilege",
+      "commands"
+    ]
+  },
+  {
+    "id": "logs-dmesg",
+    "title": "Kernel Ring Buffer With Timestamps 🧩",
+    "title_ar": "رسائل النواة مع الأوقات 🧩",
+    "category": "System Logs & History 📑",
+    "category_ar": "سجلات النظام والتاريخ (Logs) 📑",
+    "command": "dmesg -T",
+    "description": "Shows kernel messages with human-readable time.",
+    "description_ar": "يعرض رسائل النواة (Kernel) بوقت مقروء.",
+    "params": [],
+    "tags": [
+      "dmesg",
+      "kernel"
+    ]
+  },
+  {
+    "id": "logs-dmesg-usb",
+    "title": "Find USB Device Events 🔌",
+    "title_ar": "البحث عن أحداث أجهزة (USB) 🔌",
+    "category": "System Logs & History 📑",
+    "category_ar": "سجلات النظام والتاريخ (Logs) 📑",
+    "command": "dmesg -T | grep -i usb",
+    "description": "Shows when USB storage devices were attached.",
+    "description_ar": "يوضح متى وُصلت وسائط تخزين (USB) بالجهاز.",
+    "params": [],
+    "tags": [
+      "dmesg",
+      "usb",
+      "removable"
+    ]
+  },
+  {
+    "id": "logs-syslog-tail",
+    "title": "Tail System Log 📜",
+    "title_ar": "عرض آخر سجل النظام 📜",
+    "category": "System Logs & History 📑",
+    "category_ar": "سجلات النظام والتاريخ (Logs) 📑",
+    "command": "tail -n {count} /var/log/syslog",
+    "description": "Shows the latest entries in the system log.",
+    "description_ar": "يعرض أحدث المدخلات في سجل النظام.",
+    "params": [
+      {
+        "key": "count",
+        "label": "Line Count 🔢",
+        "label_ar": "عدد الأسطر 🔢",
+        "default": "50"
+      }
+    ],
+    "tags": [
+      "syslog",
+      "tail"
+    ]
+  },
+  {
+    "id": "logs-failed-ips",
+    "title": "Count Failed Logins by IP 🔢",
+    "title_ar": "عدّ محاولات الدخول الفاشلة لكل عنوان 🔢",
+    "category": "System Logs & History 📑",
+    "category_ar": "سجلات النظام والتاريخ (Logs) 📑",
+    "command": "grep \"Failed password\" {log_file} | grep -oE '([0-9]{1,3}\\.){3}[0-9]{1,3}' | sort | uniq -c | sort -nr",
+    "description": "Ranks source addresses by number of failed login attempts.",
+    "description_ar": "يرتب عناوين المصدر حسب عدد محاولات الدخول الفاشلة.",
+    "params": [
+      {
+        "key": "log_file",
+        "label": "Log File 📝",
+        "label_ar": "ملف السجل (Log) 📝",
+        "default": "/var/log/auth.log"
+      }
+    ],
+    "tags": [
+      "auth",
+      "failed",
+      "ip",
+      "ranking"
+    ]
+  },
+  {
+    "id": "logs-ausearch",
+    "title": "Search Audit Log by User 🧑‍⚖️",
+    "title_ar": "البحث في سجل التدقيق حسب المستخدم 🧑‍⚖️",
+    "category": "System Logs & History 📑",
+    "category_ar": "سجلات النظام والتاريخ (Logs) 📑",
+    "command": "ausearch -ua {username} -i",
+    "description": "Retrieves auditd records for a given user in readable form.",
+    "description_ar": "يسترجع سجلات (auditd) لمستخدم معيّن بصيغة مقروءة.",
+    "params": [
+      {
+        "key": "username",
+        "label": "Username 👤",
+        "label_ar": "اسم المستخدم 👤",
+        "default": "suspect"
+      }
+    ],
+    "tags": [
+      "auditd",
+      "ausearch",
+      "user"
+    ]
+  },
+  {
+    "id": "logs-aureport",
+    "title": "Audit Report Summary 📈",
+    "title_ar": "ملخص تقرير التدقيق 📈",
+    "category": "System Logs & History 📑",
+    "category_ar": "سجلات النظام والتاريخ (Logs) 📑",
+    "command": "aureport --summary",
+    "description": "Produces a summary of events recorded by auditd.",
+    "description_ar": "ينتج ملخصًا للأحداث المسجّلة بواسطة (auditd).",
+    "params": [],
+    "tags": [
+      "auditd",
+      "aureport",
+      "summary"
+    ]
+  },
+  {
+    "id": "logs-web-top-ip",
+    "title": "Top Client IPs in Web Access Log 🌍",
+    "title_ar": "أكثر العملاء نشاطًا في سجل الويب 🌍",
+    "category": "System Logs & History 📑",
+    "category_ar": "سجلات النظام والتاريخ (Logs) 📑",
+    "command": "awk '{print $1}' /var/log/apache2/access.log | sort | uniq -c | sort -nr | head",
+    "description": "Ranks the most active clients in an Apache access log.",
+    "description_ar": "يرتب أنشط العملاء في سجل وصول (Apache).",
+    "params": [],
+    "tags": [
+      "apache",
+      "access",
+      "ip",
+      "ranking"
+    ]
+  },
+  {
+    "id": "logs-web-attack-grep",
+    "title": "Search Web Logs for Attack Patterns 🕷️",
+    "title_ar": "البحث عن أنماط هجوم في سجلات الويب 🕷️",
+    "category": "System Logs & History 📑",
+    "category_ar": "سجلات النظام والتاريخ (Logs) 📑",
+    "command": "grep -Ei \"union select|\\.\\./|<script\" /var/log/apache2/access.log",
+    "description": "Flags SQL injection, path traversal, and XSS probes in web logs.",
+    "description_ar": "يرصد محاولات (SQL Injection) وتجاوز المسارات (Path Traversal) و(XSS) في سجلات الويب.",
+    "params": [],
+    "tags": [
+      "web",
+      "sqli",
+      "traversal",
+      "xss"
+    ]
+  },
+  {
+    "id": "logs-zgrep-rotated",
+    "title": "Search Rotated Compressed Logs 🗜️",
+    "title_ar": "البحث في السجلات المؤرشفة والمضغوطة 🗜️",
+    "category": "System Logs & History 📑",
+    "category_ar": "سجلات النظام والتاريخ (Logs) 📑",
+    "command": "zgrep -h \"{keyword}\" /var/log/auth.log*",
+    "description": "Searches current and archived logs in one pass.",
+    "description_ar": "يبحث في السجلات الحالية والمؤرشفة في خطوة واحدة.",
+    "params": [
+      {
+        "key": "keyword",
+        "label": "Keyword 🔎",
+        "label_ar": "الكلمة المفتاحية 🔎",
+        "default": "password"
+      }
+    ],
+    "tags": [
+      "zgrep",
+      "rotated",
+      "logs"
+    ]
+  },
+  {
+    "id": "logs-cron",
+    "title": "Review Cron Execution Logs ⏲️",
+    "title_ar": "مراجعة سجلات تنفيذ المهام المجدولة ⏲️",
+    "category": "System Logs & History 📑",
+    "category_ar": "سجلات النظام والتاريخ (Logs) 📑",
+    "command": "grep CRON /var/log/syslog",
+    "description": "Shows scheduled job executions recorded by cron.",
+    "description_ar": "يعرض تنفيذ المهام المجدولة المسجّلة بواسطة (cron).",
+    "params": [],
+    "tags": [
+      "cron",
+      "scheduled",
+      "syslog"
+    ]
+  },
+  {
+    "id": "logs-who",
+    "title": "Show Currently Logged-In Users 🟢",
+    "title_ar": "عرض المستخدمين المتصلين حاليًا 🟢",
+    "category": "System Logs & History 📑",
+    "category_ar": "سجلات النظام والتاريخ (Logs) 📑",
+    "command": "who -a",
+    "description": "Lists active sessions, terminals, and boot time.",
+    "description_ar": "يسرد الجلسات النشطة والطرفيات ووقت الإقلاع.",
+    "params": [],
+    "tags": [
+      "who",
+      "sessions",
+      "active"
+    ]
+  },
+  {
+    "id": "logs-utmpdump",
+    "title": "Dump Binary Login Records 🧱",
+    "title_ar": "تفريغ سجلات الدخول الثنائية 🧱",
+    "category": "System Logs & History 📑",
+    "category_ar": "سجلات النظام والتاريخ (Logs) 📑",
+    "command": "utmpdump /var/log/wtmp",
+    "description": "Converts the binary wtmp file to text so entries can be reviewed for tampering.",
+    "description_ar": "يحوّل ملف (wtmp) الثنائي إلى نص لمراجعة مدخلاته بحثًا عن عبث.",
+    "params": [],
+    "tags": [
+      "utmpdump",
+      "wtmp",
+      "logins"
+    ]
+  },
+  {
+    "id": "user-passwd",
+    "title": "Review Local Accounts 📒",
+    "title_ar": "مراجعة الحسابات المحلية 📒",
+    "category": "Users & Persistence 🕵️",
+    "category_ar": "المستخدمون والاستمرارية (Persistence) 🕵️",
+    "command": "cat /etc/passwd",
+    "description": "Lists all local accounts and their shells.",
+    "description_ar": "يسرد كل الحسابات المحلية وواجهات الأوامر (Shell) الخاصة بها.",
+    "params": [],
+    "tags": [
+      "passwd",
+      "accounts"
+    ]
+  },
+  {
+    "id": "user-uid0",
+    "title": "Find UID 0 Accounts 👑",
+    "title_ar": "البحث عن حسابات بمعرّف (UID 0) 👑",
+    "category": "Users & Persistence 🕵️",
+    "category_ar": "المستخدمون والاستمرارية (Persistence) 🕵️",
+    "command": "awk -F: '$3==0 {print $1}' /etc/passwd",
+    "description": "Finds every account with root privileges; only root should appear.",
+    "description_ar": "يجد كل حساب يملك صلاحيات الجذر (root)؛ ويُفترض ظهور حساب الجذر وحده.",
+    "params": [],
+    "tags": [
+      "uid0",
+      "root",
+      "backdoor"
+    ]
+  },
+  {
+    "id": "user-chage",
+    "title": "Check Password Aging 🔑",
+    "title_ar": "فحص عمر كلمة المرور 🔑",
+    "category": "Users & Persistence 🕵️",
+    "category_ar": "المستخدمون والاستمرارية (Persistence) 🕵️",
+    "command": "chage -l {username}",
+    "description": "Shows when a password was last changed and when the account expires.",
+    "description_ar": "يعرض آخر تغيير لكلمة المرور وموعد انتهاء الحساب.",
+    "params": [
+      {
+        "key": "username",
+        "label": "Username 👤",
+        "label_ar": "اسم المستخدم 👤",
+        "default": "suspect"
+      }
+    ],
+    "tags": [
+      "chage",
+      "password",
+      "account"
+    ]
+  },
+  {
+    "id": "user-sudoers",
+    "title": "Review Sudoers Configuration 🛠️",
+    "title_ar": "مراجعة إعدادات (sudoers) 🛠️",
+    "category": "Users & Persistence 🕵️",
+    "category_ar": "المستخدمون والاستمرارية (Persistence) 🕵️",
+    "command": "cat /etc/sudoers; ls -la /etc/sudoers.d/",
+    "description": "Looks for unexpected sudo rights granted to users.",
+    "description_ar": "يبحث عن صلاحيات (sudo) غير متوقعة ممنوحة لمستخدمين.",
+    "params": [],
+    "tags": [
+      "sudoers",
+      "privilege"
+    ]
+  },
+  {
+    "id": "user-id",
+    "title": "Show User Group Membership 👥",
+    "title_ar": "عرض عضوية المستخدم في المجموعات 👥",
+    "category": "Users & Persistence 🕵️",
+    "category_ar": "المستخدمون والاستمرارية (Persistence) 🕵️",
+    "command": "id {username}",
+    "description": "Displays UID, GID, and groups for an account.",
+    "description_ar": "يعرض معرّف المستخدم والمجموعة والمجموعات التي ينتمي إليها الحساب.",
+    "params": [
+      {
+        "key": "username",
+        "label": "Username 👤",
+        "label_ar": "اسم المستخدم 👤",
+        "default": "suspect"
+      }
+    ],
+    "tags": [
+      "id",
+      "groups",
+      "user"
+    ]
+  },
+  {
+    "id": "user-authorized-keys",
+    "title": "Inspect SSH Authorized Keys 🗝️",
+    "title_ar": "فحص مفاتيح (SSH) المصرّح بها 🗝️",
+    "category": "Users & Persistence 🕵️",
+    "category_ar": "المستخدمون والاستمرارية (Persistence) 🕵️",
+    "command": "cat /home/{username}/.ssh/authorized_keys",
+    "description": "Reveals public keys that grant passwordless access, a classic persistence method.",
+    "description_ar": "يكشف المفاتيح العامة التي تتيح الدخول دون كلمة مرور، وهي أسلوب كلاسيكي للاستمرارية.",
+    "params": [
+      {
+        "key": "username",
+        "label": "Username 👤",
+        "label_ar": "اسم المستخدم 👤",
+        "default": "suspect"
+      }
+    ],
+    "tags": [
+      "ssh",
+      "authorized_keys",
+      "persistence"
+    ]
+  },
+  {
+    "id": "user-known-hosts",
+    "title": "Inspect SSH Known Hosts 🧭",
+    "title_ar": "فحص المضيفين المعروفين في (SSH) 🧭",
+    "category": "Users & Persistence 🕵️",
+    "category_ar": "المستخدمون والاستمرارية (Persistence) 🕵️",
+    "command": "cat /home/{username}/.ssh/known_hosts",
+    "description": "Shows which hosts a user has connected to, supporting lateral movement analysis.",
+    "description_ar": "يوضح الأجهزة التي اتصل بها المستخدم، مما يدعم تحليل الحركة الجانبية (Lateral Movement).",
+    "params": [
+      {
+        "key": "username",
+        "label": "Username 👤",
+        "label_ar": "اسم المستخدم 👤",
+        "default": "suspect"
+      }
+    ],
+    "tags": [
+      "ssh",
+      "known_hosts",
+      "lateral"
+    ]
+  },
+  {
+    "id": "user-bash-history",
+    "title": "Read Bash History 📜",
+    "title_ar": "قراءة سجل أوامر (Bash) 📜",
+    "category": "Users & Persistence 🕵️",
+    "category_ar": "المستخدمون والاستمرارية (Persistence) 🕵️",
+    "command": "cat /home/{username}/.bash_history",
+    "description": "Shows commands a user typed in interactive shells.",
+    "description_ar": "يعرض الأوامر التي كتبها المستخدم في الطرفيات التفاعلية.",
+    "params": [
+      {
+        "key": "username",
+        "label": "Username 👤",
+        "label_ar": "اسم المستخدم 👤",
+        "default": "suspect"
+      }
+    ],
+    "tags": [
+      "bash",
+      "history",
+      "commands"
+    ]
+  },
+  {
+    "id": "user-crontab",
+    "title": "List User Crontab ⏰",
+    "title_ar": "عرض المهام المجدولة للمستخدم ⏰",
+    "category": "Users & Persistence 🕵️",
+    "category_ar": "المستخدمون والاستمرارية (Persistence) 🕵️",
+    "command": "crontab -l -u {username}",
+    "description": "Shows scheduled jobs of a specific user.",
+    "description_ar": "يعرض المهام المجدولة (crontab) لمستخدم محدد.",
+    "params": [
+      {
+        "key": "username",
+        "label": "Username 👤",
+        "label_ar": "اسم المستخدم 👤",
+        "default": "suspect"
+      }
+    ],
+    "tags": [
+      "crontab",
+      "scheduled",
+      "persistence"
+    ]
+  },
+  {
+    "id": "user-cron-system",
+    "title": "List System Cron Locations 🗂️",
+    "title_ar": "عرض مواقع المهام المجدولة للنظام 🗂️",
+    "category": "Users & Persistence 🕵️",
+    "category_ar": "المستخدمون والاستمرارية (Persistence) 🕵️",
+    "command": "ls -la /etc/cron.* /var/spool/cron/crontabs/ 2>/dev/null",
+    "description": "Enumerates system-wide cron directories for suspicious jobs.",
+    "description_ar": "يستعرض مجلدات (cron) على مستوى النظام بحثًا عن مهام مشبوهة.",
+    "params": [],
+    "tags": [
+      "cron",
+      "system",
+      "persistence"
+    ]
+  },
+  {
+    "id": "user-systemd-timers",
+    "title": "List systemd Timers ⏳",
+    "title_ar": "عرض مؤقتات (systemd) ⏳",
+    "category": "Users & Persistence 🕵️",
+    "category_ar": "المستخدمون والاستمرارية (Persistence) 🕵️",
+    "command": "systemctl list-timers --all",
+    "description": "Shows all timer units that may run malicious tasks.",
+    "description_ar": "يعرض كل وحدات المؤقت التي قد تشغّل مهام خبيثة.",
+    "params": [],
+    "tags": [
+      "systemd",
+      "timers",
+      "persistence"
+    ]
+  },
+  {
+    "id": "user-systemd-enabled",
+    "title": "List Enabled Services 🚀",
+    "title_ar": "عرض الخدمات المفعّلة 🚀",
+    "category": "Users & Persistence 🕵️",
+    "category_ar": "المستخدمون والاستمرارية (Persistence) 🕵️",
+    "command": "systemctl list-unit-files --state=enabled",
+    "description": "Lists services configured to start at boot.",
+    "description_ar": "يسرد الخدمات المضبوطة على العمل عند الإقلاع.",
+    "params": [],
+    "tags": [
+      "systemd",
+      "services",
+      "boot"
+    ]
+  },
+  {
+    "id": "user-systemd-cat",
+    "title": "Show Service Unit File 📄",
+    "title_ar": "عرض ملف تعريف الخدمة 📄",
+    "category": "Users & Persistence 🕵️",
+    "category_ar": "المستخدمون والاستمرارية (Persistence) 🕵️",
+    "command": "systemctl cat {service}",
+    "description": "Displays the exact unit definition of a service including ExecStart.",
+    "description_ar": "يعرض تعريف الخدمة الفعلي بما فيه سطر (ExecStart).",
+    "params": [
+      {
+        "key": "service",
+        "label": "Service Name ⚙️",
+        "label_ar": "اسم الخدمة (Service) ⚙️",
+        "default": "ssh"
+      }
+    ],
+    "tags": [
+      "systemd",
+      "unit",
+      "execstart"
+    ]
+  },
+  {
+    "id": "user-rc-local",
+    "title": "Check rc.local Startup Script 🧷",
+    "title_ar": "فحص سكربت الإقلاع (rc.local) 🧷",
+    "category": "Users & Persistence 🕵️",
+    "category_ar": "المستخدمون والاستمرارية (Persistence) 🕵️",
+    "command": "cat /etc/rc.local",
+    "description": "Checks a legacy startup script often abused for persistence.",
+    "description_ar": "يفحص سكربت إقلاع قديم يُساء استخدامه كثيرًا للاستمرارية.",
+    "params": [],
+    "tags": [
+      "rc.local",
+      "startup"
+    ]
+  },
+  {
+    "id": "user-profile-scripts",
+    "title": "Review Login Profile Scripts 📃",
+    "title_ar": "مراجعة سكربتات الدخول (profile) 📃",
+    "category": "Users & Persistence 🕵️",
+    "category_ar": "المستخدمون والاستمرارية (Persistence) 🕵️",
+    "command": "ls -la /etc/profile.d/ && cat /etc/profile",
+    "description": "Looks for malicious code executed at user login.",
+    "description_ar": "يبحث عن شيفرة خبيثة تُنفَّذ عند دخول المستخدم.",
+    "params": [],
+    "tags": [
+      "profile",
+      "login",
+      "scripts"
+    ]
+  },
+  {
+    "id": "user-bashrc",
+    "title": "Inspect User .bashrc 🐚",
+    "title_ar": "فحص ملف (.bashrc) للمستخدم 🐚",
+    "category": "Users & Persistence 🕵️",
+    "category_ar": "المستخدمون والاستمرارية (Persistence) 🕵️",
+    "command": "cat /home/{username}/.bashrc",
+    "description": "Looks for aliases or commands injected into the shell startup file.",
+    "description_ar": "يبحث عن أسماء مستعارة (Aliases) أو أوامر حُقنت في ملف إعداد الطرفية.",
+    "params": [
+      {
+        "key": "username",
+        "label": "Username 👤",
+        "label_ar": "اسم المستخدم 👤",
+        "default": "suspect"
+      }
+    ],
+    "tags": [
+      "bashrc",
+      "shell",
+      "persistence"
+    ]
+  },
+  {
+    "id": "user-ld-preload",
+    "title": "Check ld.so.preload for Hijacking 🪝",
+    "title_ar": "فحص اختطاف المكتبات (ld.so.preload) 🪝",
+    "category": "Users & Persistence 🕵️",
+    "category_ar": "المستخدمون والاستمرارية (Persistence) 🕵️",
+    "command": "cat /etc/ld.so.preload",
+    "description": "Detects libraries force-loaded into every process, a rootkit technique.",
+    "description_ar": "يكشف المكتبات المحمّلة قسرًا في كل عملية، وهي تقنية تستخدمها حزم إخفاء البرمجيات الخبيثة (Rootkit).",
+    "params": [],
+    "tags": [
+      "ld.so.preload",
+      "rootkit"
+    ]
+  },
+  {
+    "id": "user-atq",
+    "title": "List Pending at Jobs 🧮",
+    "title_ar": "عرض مهام (at) المعلّقة 🧮",
+    "category": "Users & Persistence 🕵️",
+    "category_ar": "المستخدمون والاستمرارية (Persistence) 🕵️",
+    "command": "atq",
+    "description": "Shows one-time scheduled jobs.",
+    "description_ar": "يعرض المهام المجدولة لمرة واحدة.",
+    "params": [],
+    "tags": [
+      "at",
+      "jobs",
+      "scheduled"
+    ]
+  },
+  {
+    "id": "user-home-recent",
+    "title": "List Home Directories by Creation Time 🏠",
+    "title_ar": "ترتيب مجلدات المستخدمين حسب الحداثة 🏠",
+    "category": "Users & Persistence 🕵️",
+    "category_ar": "المستخدمون والاستمرارية (Persistence) 🕵️",
+    "command": "ls -lt --time-style=full-iso /home",
+    "description": "Shows which user directories were created or touched most recently.",
+    "description_ar": "يوضح أي مجلدات مستخدمين أُنشئت أو لُمست مؤخرًا.",
+    "params": [],
+    "tags": [
+      "home",
+      "users",
+      "recent"
+    ]
+  },
+  {
+    "id": "user-pam",
+    "title": "Review PAM Configuration 🔏",
+    "title_ar": "مراجعة إعدادات (PAM) 🔏",
+    "category": "Users & Persistence 🕵️",
+    "category_ar": "المستخدمون والاستمرارية (Persistence) 🕵️",
+    "command": "ls -la /etc/pam.d/",
+    "description": "Lists PAM modules that could be tampered with to capture credentials.",
+    "description_ar": "يسرد وحدات (PAM) التي قد يُعبث بها لسرقة بيانات الدخول.",
+    "params": [],
+    "tags": [
+      "pam",
+      "authentication",
+      "tampering"
+    ]
+  },
+  {
+    "id": "mal-yara",
+    "title": "Scan With YARA Rules 🧬",
+    "title_ar": "الفحص بقواعد (YARA) 🧬",
+    "category": "Malware Analysis 🦠",
+    "category_ar": "تحليل البرمجيات الخبيثة (Malware) 🦠",
+    "command": "yara -r {yara_rules} {search_dir}",
+    "description": "Scans files recursively for patterns defined in YARA rules.",
+    "description_ar": "يفحص الملفات تكراريًا بحثًا عن الأنماط المعرّفة في قواعد (YARA).",
+    "params": [
+      {
+        "key": "yara_rules",
+        "label": "YARA Rules File 📜",
+        "label_ar": "ملف قواعد (YARA) 📜",
+        "default": "/evidence/rules.yar"
+      },
+      {
+        "key": "search_dir",
+        "label": "Search Directory 📂",
+        "label_ar": "مجلد البحث 📂",
+        "default": "/home"
+      }
+    ],
+    "tags": [
+      "yara",
+      "scan",
+      "signatures"
+    ]
+  },
+  {
+    "id": "mal-clamscan",
+    "title": "Scan With ClamAV 🦠",
+    "title_ar": "الفحص بمضاد الفيروسات (ClamAV) 🦠",
+    "category": "Malware Analysis 🦠",
+    "category_ar": "تحليل البرمجيات الخبيثة (Malware) 🦠",
+    "command": "clamscan -r --infected --log={output_dir}/clamscan.log {search_dir}",
+    "description": "Runs an antivirus scan and logs only infected files.",
+    "description_ar": "يشغّل فحصًا بمضاد الفيروسات ويسجل الملفات المصابة فقط.",
+    "params": [
+      {
+        "key": "output_dir",
+        "label": "Output Directory 📁",
+        "label_ar": "مجلد المخرجات 📁",
+        "default": "/evidence/output"
+      },
+      {
+        "key": "search_dir",
+        "label": "Search Directory 📂",
+        "label_ar": "مجلد البحث 📂",
+        "default": "/home"
+      }
+    ],
+    "tags": [
+      "clamav",
+      "antivirus",
+      "scan"
+    ]
+  },
+  {
+    "id": "mal-rkhunter",
+    "title": "Run rkhunter Rootkit Check 🕵️",
+    "title_ar": "فحص حزم الإخفاء بأداة (rkhunter) 🕵️",
+    "category": "Malware Analysis 🦠",
+    "category_ar": "تحليل البرمجيات الخبيثة (Malware) 🦠",
+    "command": "rkhunter --check --skip-keypress",
+    "description": "Checks for known rootkits, suspicious files, and modified binaries.",
+    "description_ar": "يتحقق من وجود (Rootkits) معروفة وملفات مريبة وبرامج معدّلة.",
+    "params": [],
+    "tags": [
+      "rkhunter",
+      "rootkit"
+    ]
+  },
+  {
+    "id": "mal-chkrootkit",
+    "title": "Run chkrootkit 🔬",
+    "title_ar": "تشغيل أداة (chkrootkit) 🔬",
+    "category": "Malware Analysis 🦠",
+    "category_ar": "تحليل البرمجيات الخبيثة (Malware) 🦠",
+    "command": "chkrootkit",
+    "description": "Scans the system for signs of common rootkits.",
+    "description_ar": "يفحص النظام بحثًا عن علامات حزم الإخفاء الشائعة.",
+    "params": [],
+    "tags": [
+      "chkrootkit",
+      "rootkit"
+    ]
+  },
+  {
+    "id": "mal-readelf-h",
+    "title": "Read ELF Header 📐",
+    "title_ar": "قراءة ترويسة (ELF) 📐",
+    "category": "Malware Analysis 🦠",
+    "category_ar": "تحليل البرمجيات الخبيثة (Malware) 🦠",
+    "command": "readelf -h {file_path}",
+    "description": "Shows ELF type, architecture, and entry point of a binary without executing it.",
+    "description_ar": "يعرض نوع الملف ومعماريته ونقطة بدايته دون تنفيذه.",
+    "params": [
+      {
+        "key": "file_path",
+        "label": "Target File Path 🎯",
+        "label_ar": "مسار الملف المستهدف 🎯",
+        "default": "/home/user/malicious.sh"
+      }
+    ],
+    "tags": [
+      "readelf",
+      "elf",
+      "header"
+    ]
+  },
+  {
+    "id": "mal-readelf-d",
+    "title": "Read ELF Dynamic Section 🧷",
+    "title_ar": "قراءة قسم الربط الديناميكي (ELF) 🧷",
+    "category": "Malware Analysis 🦠",
+    "category_ar": "تحليل البرمجيات الخبيثة (Malware) 🦠",
+    "command": "readelf -d {file_path}",
+    "description": "Shows dynamic linking info such as needed libraries and RPATH without executing the sample.",
+    "description_ar": "يعرض معلومات الربط الديناميكي مثل المكتبات المطلوبة و(RPATH) دون تنفيذ العينة.",
+    "params": [
+      {
+        "key": "file_path",
+        "label": "Target File Path 🎯",
+        "label_ar": "مسار الملف المستهدف 🎯",
+        "default": "/home/user/malicious.sh"
+      }
+    ],
+    "tags": [
+      "readelf",
+      "elf",
+      "dynamic"
+    ]
+  },
+  {
+    "id": "mal-objdump-d",
+    "title": "Disassemble Binary (First 100 Lines) 🧩",
+    "title_ar": "تفكيك البرنامج (أول 100 سطر) 🧩",
+    "category": "Malware Analysis 🦠",
+    "category_ar": "تحليل البرمجيات الخبيثة (Malware) 🦠",
+    "command": "objdump -d {file_path} | head -n 100",
+    "description": "Statically disassembles executable code for inspection.",
+    "description_ar": "يفكك الشيفرة التنفيذية بشكل ثابت (Static) لفحصها.",
+    "params": [
+      {
+        "key": "file_path",
+        "label": "Target File Path 🎯",
+        "label_ar": "مسار الملف المستهدف 🎯",
+        "default": "/home/user/malicious.sh"
+      }
+    ],
+    "tags": [
+      "objdump",
+      "disassembly",
+      "static"
+    ]
+  },
+  {
+    "id": "mal-objdump-needed",
+    "title": "List Binary Library Dependencies 📚",
+    "title_ar": "سرد مكتبات البرنامج المطلوبة 📚",
+    "category": "Malware Analysis 🦠",
+    "category_ar": "تحليل البرمجيات الخبيثة (Malware) 🦠",
+    "command": "objdump -p {file_path} | grep NEEDED",
+    "description": "Safely lists required shared libraries without executing the sample.",
+    "description_ar": "يسرد المكتبات المشتركة التي يحتاجها البرنامج بأمان دون تنفيذ العينة.",
+    "params": [
+      {
+        "key": "file_path",
+        "label": "Target File Path 🎯",
+        "label_ar": "مسار الملف المستهدف 🎯",
+        "default": "/home/user/malicious.sh"
+      }
+    ],
+    "tags": [
+      "objdump",
+      "dependencies",
+      "safe"
+    ]
+  },
+  {
+    "id": "mal-nm",
+    "title": "List Dynamic Symbols 🔣",
+    "title_ar": "سرد الرموز الديناميكية 🔣",
+    "category": "Malware Analysis 🦠",
+    "category_ar": "تحليل البرمجيات الخبيثة (Malware) 🦠",
+    "command": "nm -D {file_path}",
+    "description": "Shows imported and exported symbols to infer capabilities.",
+    "description_ar": "يعرض الرموز المستوردة والمصدّرة لاستنتاج قدرات البرنامج.",
+    "params": [
+      {
+        "key": "file_path",
+        "label": "Target File Path 🎯",
+        "label_ar": "مسار الملف المستهدف 🎯",
+        "default": "/home/user/malicious.sh"
+      }
+    ],
+    "tags": [
+      "nm",
+      "symbols",
+      "imports"
+    ]
+  },
+  {
+    "id": "mal-strings-iocs",
+    "title": "Extract URLs and IPs From Binary 🔗",
+    "title_ar": "استخراج الروابط وعناوين (IP) من البرنامج 🔗",
+    "category": "Malware Analysis 🦠",
+    "category_ar": "تحليل البرمجيات الخبيثة (Malware) 🦠",
+    "command": "strings -a {file_path} | grep -Eo \"https?://[^ ]+|([0-9]{1,3}\\.){3}[0-9]{1,3}\"",
+    "description": "Pulls embedded network indicators from a sample.",
+    "description_ar": "يسحب مؤشرات الاختراق الشبكية (IOCs) المضمّنة داخل العينة.",
+    "params": [
+      {
+        "key": "file_path",
+        "label": "Target File Path 🎯",
+        "label_ar": "مسار الملف المستهدف 🎯",
+        "default": "/home/user/malicious.sh"
+      }
+    ],
+    "tags": [
+      "strings",
+      "ioc",
+      "urls",
+      "ips"
+    ]
+  },
+  {
+    "id": "mal-binwalk",
+    "title": "Scan for Embedded Files 🪆",
+    "title_ar": "فحص الملفات المضمّنة 🪆",
+    "category": "Malware Analysis 🦠",
+    "category_ar": "تحليل البرمجيات الخبيثة (Malware) 🦠",
+    "command": "binwalk {file_path}",
+    "description": "Detects files and compressed data hidden inside another file.",
+    "description_ar": "يكتشف الملفات والبيانات المضغوطة المخبّأة داخل ملف آخر.",
+    "params": [
+      {
+        "key": "file_path",
+        "label": "Target File Path 🎯",
+        "label_ar": "مسار الملف المستهدف 🎯",
+        "default": "/home/user/malicious.sh"
+      }
+    ],
+    "tags": [
+      "binwalk",
+      "embedded",
+      "carving"
+    ]
+  },
+  {
+    "id": "mal-entropy",
+    "title": "Check File Entropy 📉",
+    "title_ar": "فحص إنتروبيا الملف 📉",
+    "category": "Malware Analysis 🦠",
+    "category_ar": "تحليل البرمجيات الخبيثة (Malware) 🦠",
+    "command": "binwalk -E {file_path}",
+    "description": "Plots entropy to reveal packed or encrypted regions.",
+    "description_ar": "يرسم الإنتروبيا (Entropy) لكشف المناطق المضغوطة أو المشفّرة.",
+    "params": [
+      {
+        "key": "file_path",
+        "label": "Target File Path 🎯",
+        "label_ar": "مسار الملف المستهدف 🎯",
+        "default": "/home/user/malicious.sh"
+      }
+    ],
+    "tags": [
+      "entropy",
+      "packed",
+      "encrypted"
+    ]
+  },
+  {
+    "id": "mal-lsmod",
+    "title": "List Loaded Kernel Modules 🧱",
+    "title_ar": "سرد وحدات النواة المحمّلة 🧱",
+    "category": "Malware Analysis 🦠",
+    "category_ar": "تحليل البرمجيات الخبيثة (Malware) 🦠",
+    "command": "lsmod",
+    "description": "Lists loaded kernel modules to spot unknown or hidden ones.",
+    "description_ar": "يسرد وحدات النواة (Kernel Modules) المحمّلة لاكتشاف المجهول أو المخفي منها.",
+    "params": [],
+    "tags": [
+      "lsmod",
+      "kernel",
+      "modules"
+    ]
+  },
+  {
+    "id": "mal-modinfo",
+    "title": "Inspect a Kernel Module 🧐",
+    "title_ar": "فحص وحدة نواة 🧐",
+    "category": "Malware Analysis 🦠",
+    "category_ar": "تحليل البرمجيات الخبيثة (Malware) 🦠",
+    "command": "modinfo {module}",
+    "description": "Shows author, path, and parameters of a kernel module.",
+    "description_ar": "يعرض مؤلف وحدة النواة ومسارها ومعاملاتها.",
+    "params": [
+      {
+        "key": "module",
+        "label": "Kernel Module Name 🧱",
+        "label_ar": "اسم وحدة النواة (Kernel Module) 🧱",
+        "default": "suspicious_mod"
+      }
+    ],
+    "tags": [
+      "modinfo",
+      "kernel",
+      "module"
+    ]
+  },
+  {
+    "id": "mal-hidden-pids",
+    "title": "Compare ps Output Against /proc 🫥",
+    "title_ar": "مقارنة مخرجات (ps) مع (/proc) 🫥",
+    "category": "Malware Analysis 🦠",
+    "category_ar": "تحليل البرمجيات الخبيثة (Malware) 🦠",
+    "command": "diff <(ps -e -o pid= | sort -n) <(ls /proc | grep -E '^[0-9]+$' | sort -n)",
+    "description": "Highlights PIDs present in /proc but hidden from ps, a rootkit hint.",
+    "description_ar": "يبرز المعرّفات الموجودة في (/proc) والمخفية عن (ps)، وهي إشارة إلى (Rootkit).",
+    "params": [],
+    "tags": [
+      "hidden",
+      "pid",
+      "rootkit",
+      "proc"
+    ]
+  },
+  {
+    "id": "mal-olevba",
+    "title": "Extract Office Macros (olevba) 📎",
+    "title_ar": "استخراج وحدات الماكرو من مستندات (Office) 📎",
+    "category": "Malware Analysis 🦠",
+    "category_ar": "تحليل البرمجيات الخبيثة (Malware) 🦠",
+    "command": "olevba {file_path}",
+    "description": "Extracts and analyzes VBA macros from Office documents without opening them.",
+    "description_ar": "يستخرج وحدات (VBA) ويحللها دون فتح المستند.",
+    "params": [
+      {
+        "key": "file_path",
+        "label": "Target File Path 🎯",
+        "label_ar": "مسار الملف المستهدف 🎯",
+        "default": "/home/user/malicious.sh"
+      }
+    ],
+    "tags": [
+      "olevba",
+      "macro",
+      "office"
+    ]
+  },
+  {
+    "id": "mal-capa",
+    "title": "Identify Capabilities With capa 🧠",
+    "title_ar": "تحديد قدرات البرنامج بأداة (capa) 🧠",
+    "category": "Malware Analysis 🦠",
+    "category_ar": "تحليل البرمجيات الخبيثة (Malware) 🦠",
+    "command": "capa {file_path}",
+    "description": "Maps a binary to known malicious behaviors using static analysis.",
+    "description_ar": "يربط الملف التنفيذي بسلوكيات خبيثة معروفة عبر التحليل الثابت.",
+    "params": [
+      {
+        "key": "file_path",
+        "label": "Target File Path 🎯",
+        "label_ar": "مسار الملف المستهدف 🎯",
+        "default": "/home/user/malicious.sh"
+      }
+    ],
+    "tags": [
+      "capa",
+      "capabilities",
+      "static"
+    ]
+  },
+  {
+    "id": "mal-debsums",
+    "title": "Verify Installed Package Files (Debian) ✔️",
+    "title_ar": "التحقق من ملفات الحزم المثبّتة (Debian) ✔️",
+    "category": "Malware Analysis 🦠",
+    "category_ar": "تحليل البرمجيات الخبيثة (Malware) 🦠",
+    "command": "debsums -c",
+    "description": "Reports package files whose checksums no longer match, indicating modification.",
+    "description_ar": "يبلّغ عن ملفات الحزم التي لم تعد بصماتها مطابقة، ما يدل على تعديلها.",
+    "params": [],
+    "tags": [
+      "debsums",
+      "integrity",
+      "packages"
+    ]
+  },
+  {
+    "id": "mem-banners",
+    "title": "Identify Memory Image OS Banner 🏷️",
+    "title_ar": "تحديد نظام صورة الذاكرة 🏷️",
+    "category": "Memory Forensics 🧬",
+    "category_ar": "تحليل الذاكرة (Memory Forensics) 🧬",
+    "command": "vol -f {mem_image} banners.Banners",
+    "description": "Finds Linux kernel banners to choose the right symbol table.",
+    "description_ar": "يجد لافتات نواة (Linux) لاختيار جدول الرموز (Symbol Table) المناسب.",
+    "params": [
+      {
+        "key": "mem_image",
+        "label": "Memory Image 🧠",
+        "label_ar": "صورة الذاكرة (Memory Image) 🧠",
+        "default": "/evidence/memory.raw"
+      }
+    ],
+    "tags": [
+      "volatility",
+      "banners",
+      "linux"
+    ]
+  },
+  {
+    "id": "mem-win-info",
+    "title": "Windows Image Information ℹ️",
+    "title_ar": "معلومات صورة ذاكرة (Windows) ℹ️",
+    "category": "Memory Forensics 🧬",
+    "category_ar": "تحليل الذاكرة (Memory Forensics) 🧬",
+    "command": "vol -f {mem_image} windows.info.Info",
+    "description": "Shows OS build, architecture, and kernel base of a Windows memory image.",
+    "description_ar": "يعرض إصدار النظام والمعمارية وقاعدة النواة لصورة ذاكرة (Windows).",
+    "params": [
+      {
+        "key": "mem_image",
+        "label": "Memory Image 🧠",
+        "label_ar": "صورة الذاكرة (Memory Image) 🧠",
+        "default": "/evidence/memory.raw"
+      }
+    ],
+    "tags": [
+      "volatility",
+      "windows",
+      "info"
+    ]
+  },
+  {
+    "id": "mem-win-pslist",
+    "title": "Windows Process List 📋",
+    "title_ar": "قائمة عمليات (Windows) 📋",
+    "category": "Memory Forensics 🧬",
+    "category_ar": "تحليل الذاكرة (Memory Forensics) 🧬",
+    "command": "vol -f {mem_image} windows.pslist.PsList",
+    "description": "Lists processes from the Windows kernel process list.",
+    "description_ar": "يسرد العمليات من قائمة عمليات نواة (Windows).",
+    "params": [
+      {
+        "key": "mem_image",
+        "label": "Memory Image 🧠",
+        "label_ar": "صورة الذاكرة (Memory Image) 🧠",
+        "default": "/evidence/memory.raw"
+      }
+    ],
+    "tags": [
+      "volatility",
+      "windows",
+      "pslist"
+    ]
+  },
+  {
+    "id": "mem-win-pstree",
+    "title": "Windows Process Tree 🌲",
+    "title_ar": "شجرة عمليات (Windows) 🌲",
+    "category": "Memory Forensics 🧬",
+    "category_ar": "تحليل الذاكرة (Memory Forensics) 🧬",
+    "command": "vol -f {mem_image} windows.pstree.PsTree",
+    "description": "Shows parent-child relationships of Windows processes.",
+    "description_ar": "يعرض علاقات الأب والابن بين عمليات (Windows).",
+    "params": [
+      {
+        "key": "mem_image",
+        "label": "Memory Image 🧠",
+        "label_ar": "صورة الذاكرة (Memory Image) 🧠",
+        "default": "/evidence/memory.raw"
+      }
+    ],
+    "tags": [
+      "volatility",
+      "windows",
+      "pstree"
+    ]
+  },
+  {
+    "id": "mem-win-cmdline",
+    "title": "Windows Process Command Lines 💬",
+    "title_ar": "أسطر أوامر عمليات (Windows) 💬",
+    "category": "Memory Forensics 🧬",
+    "category_ar": "تحليل الذاكرة (Memory Forensics) 🧬",
+    "command": "vol -f {mem_image} windows.cmdline.CmdLine",
+    "description": "Recovers command lines used to start each process.",
+    "description_ar": "يسترجع أسطر الأوامر التي بدأت بها كل عملية.",
+    "params": [
+      {
+        "key": "mem_image",
+        "label": "Memory Image 🧠",
+        "label_ar": "صورة الذاكرة (Memory Image) 🧠",
+        "default": "/evidence/memory.raw"
+      }
+    ],
+    "tags": [
+      "volatility",
+      "windows",
+      "cmdline"
+    ]
+  },
+  {
+    "id": "mem-win-netscan",
+    "title": "Windows Network Connections 🌐",
+    "title_ar": "اتصالات الشبكة في (Windows) 🌐",
+    "category": "Memory Forensics 🧬",
+    "category_ar": "تحليل الذاكرة (Memory Forensics) 🧬",
+    "command": "vol -f {mem_image} windows.netscan.NetScan",
+    "description": "Finds network connections and listeners in memory, including closed ones.",
+    "description_ar": "يجد اتصالات الشبكة والمنافذ المستمعة في الذاكرة، بما فيها المغلقة.",
+    "params": [
+      {
+        "key": "mem_image",
+        "label": "Memory Image 🧠",
+        "label_ar": "صورة الذاكرة (Memory Image) 🧠",
+        "default": "/evidence/memory.raw"
+      }
+    ],
+    "tags": [
+      "volatility",
+      "windows",
+      "netscan"
+    ]
+  },
+  {
+    "id": "mem-win-malfind",
+    "title": "Find Injected Code (Windows) 💉",
+    "title_ar": "كشف الشيفرة المحقونة (Windows) 💉",
+    "category": "Memory Forensics 🧬",
+    "category_ar": "تحليل الذاكرة (Memory Forensics) 🧬",
+    "command": "vol -f {mem_image} windows.malfind.Malfind",
+    "description": "Detects suspicious executable memory regions that suggest code injection.",
+    "description_ar": "يرصد مناطق الذاكرة التنفيذية المريبة التي توحي بحقن شيفرة.",
+    "params": [
+      {
+        "key": "mem_image",
+        "label": "Memory Image 🧠",
+        "label_ar": "صورة الذاكرة (Memory Image) 🧠",
+        "default": "/evidence/memory.raw"
+      }
+    ],
+    "tags": [
+      "volatility",
+      "windows",
+      "malfind",
+      "injection"
+    ]
+  },
+  {
+    "id": "mem-win-filescan",
+    "title": "Scan for File Objects 🗂️",
+    "title_ar": "مسح كائنات الملفات 🗂️",
+    "category": "Memory Forensics 🧬",
+    "category_ar": "تحليل الذاكرة (Memory Forensics) 🧬",
+    "command": "vol -f {mem_image} windows.filescan.FileScan",
+    "description": "Lists file objects found in memory.",
+    "description_ar": "يسرد كائنات الملفات الموجودة في الذاكرة.",
+    "params": [
+      {
+        "key": "mem_image",
+        "label": "Memory Image 🧠",
+        "label_ar": "صورة الذاكرة (Memory Image) 🧠",
+        "default": "/evidence/memory.raw"
+      }
+    ],
+    "tags": [
+      "volatility",
+      "windows",
+      "filescan"
+    ]
+  },
+  {
+    "id": "mem-win-hivelist",
+    "title": "List Registry Hives 🗝️",
+    "title_ar": "سرد خلايا السجل (Registry Hives) 🗝️",
+    "category": "Memory Forensics 🧬",
+    "category_ar": "تحليل الذاكرة (Memory Forensics) 🧬",
+    "command": "vol -f {mem_image} windows.registry.hivelist.HiveList",
+    "description": "Locates registry hives loaded in memory.",
+    "description_ar": "يحدد مواقع خلايا سجل النظام المحمّلة في الذاكرة.",
+    "params": [
+      {
+        "key": "mem_image",
+        "label": "Memory Image 🧠",
+        "label_ar": "صورة الذاكرة (Memory Image) 🧠",
+        "default": "/evidence/memory.raw"
+      }
+    ],
+    "tags": [
+      "volatility",
+      "windows",
+      "registry"
+    ]
+  },
+  {
+    "id": "mem-lin-pslist",
+    "title": "Linux Process List 🐧",
+    "title_ar": "قائمة عمليات (Linux) 🐧",
+    "category": "Memory Forensics 🧬",
+    "category_ar": "تحليل الذاكرة (Memory Forensics) 🧬",
+    "command": "vol -f {mem_image} linux.pslist.PsList",
+    "description": "Lists processes from a Linux memory image.",
+    "description_ar": "يسرد العمليات من صورة ذاكرة (Linux).",
+    "params": [
+      {
+        "key": "mem_image",
+        "label": "Memory Image 🧠",
+        "label_ar": "صورة الذاكرة (Memory Image) 🧠",
+        "default": "/evidence/memory.raw"
+      }
+    ],
+    "tags": [
+      "volatility",
+      "linux",
+      "pslist"
+    ]
+  },
+  {
+    "id": "mem-lin-bash",
+    "title": "Recover Bash History From Memory 🐚",
+    "title_ar": "استرجاع سجل (Bash) من الذاكرة 🐚",
+    "category": "Memory Forensics 🧬",
+    "category_ar": "تحليل الذاكرة (Memory Forensics) 🧬",
+    "command": "vol -f {mem_image} linux.bash.Bash",
+    "description": "Recovers shell commands still resident in memory.",
+    "description_ar": "يسترجع أوامر الطرفية التي ما زالت في الذاكرة.",
+    "params": [
+      {
+        "key": "mem_image",
+        "label": "Memory Image 🧠",
+        "label_ar": "صورة الذاكرة (Memory Image) 🧠",
+        "default": "/evidence/memory.raw"
+      }
+    ],
+    "tags": [
+      "volatility",
+      "linux",
+      "bash",
+      "history"
+    ]
+  },
+  {
+    "id": "mem-lin-lsmod",
+    "title": "Linux Kernel Modules in Memory 🧱",
+    "title_ar": "وحدات نواة (Linux) في الذاكرة 🧱",
+    "category": "Memory Forensics 🧬",
+    "category_ar": "تحليل الذاكرة (Memory Forensics) 🧬",
+    "command": "vol -f {mem_image} linux.lsmod.Lsmod",
+    "description": "Lists kernel modules found in a memory image.",
+    "description_ar": "يسرد وحدات النواة الموجودة في صورة الذاكرة.",
+    "params": [
+      {
+        "key": "mem_image",
+        "label": "Memory Image 🧠",
+        "label_ar": "صورة الذاكرة (Memory Image) 🧠",
+        "default": "/evidence/memory.raw"
+      }
+    ],
+    "tags": [
+      "volatility",
+      "linux",
+      "lsmod"
+    ]
+  },
+  {
+    "id": "mem-lin-sockstat",
+    "title": "Linux Sockets in Memory 🔌",
+    "title_ar": "مقابس (Linux) في الذاكرة 🔌",
+    "category": "Memory Forensics 🧬",
+    "category_ar": "تحليل الذاكرة (Memory Forensics) 🧬",
+    "command": "vol -f {mem_image} linux.sockstat.Sockstat",
+    "description": "Shows open sockets with owning processes from a memory image.",
+    "description_ar": "يعرض المقابس المفتوحة وعملياتها المالكة من صورة الذاكرة.",
+    "params": [
+      {
+        "key": "mem_image",
+        "label": "Memory Image 🧠",
+        "label_ar": "صورة الذاكرة (Memory Image) 🧠",
+        "default": "/evidence/memory.raw"
+      }
+    ],
+    "tags": [
+      "volatility",
+      "linux",
+      "sockstat"
+    ]
+  },
+  {
+    "id": "mem-avml",
+    "title": "Acquire Linux Memory With AVML 📸",
+    "title_ar": "التقاط ذاكرة (Linux) بأداة (AVML) 📸",
+    "category": "Memory Forensics 🧬",
+    "category_ar": "تحليل الذاكرة (Memory Forensics) 🧬",
+    "command": "avml {output_img}",
+    "description": "Captures physical memory from a live Linux host to a file.",
+    "description_ar": "يلتقط الذاكرة الفعلية من جهاز (Linux) يعمل ويحفظها في ملف.",
+    "params": [
+      {
+        "key": "output_img",
+        "label": "Output Image Path 📁",
+        "label_ar": "مسار ملف الصورة الناتج 📁",
+        "default": "/evidence/disk.img"
+      }
+    ],
+    "tags": [
+      "avml",
+      "acquisition",
+      "memory"
+    ]
+  },
+  {
+    "id": "time-date",
+    "title": "Record System Date and Timezone 🕐",
+    "title_ar": "تسجيل التاريخ والمنطقة الزمنية 🕐",
+    "category": "Timeline & Triage ⏰",
+    "category_ar": "الخط الزمني والفرز السريع (Triage) ⏰",
+    "command": "date -u; timedatectl",
+    "description": "Documents system time and timezone at collection to anchor timeline analysis.",
+    "description_ar": "يوثّق وقت النظام ومنطقته الزمنية عند الجمع لتثبيت مرجع زمني للتحليل.",
+    "params": [],
+    "tags": [
+      "date",
+      "timezone",
+      "clock"
+    ]
+  },
+  {
+    "id": "time-uptime",
+    "title": "Show Boot Time and Uptime 🔋",
+    "title_ar": "عرض وقت الإقلاع ومدة التشغيل 🔋",
+    "category": "Timeline & Triage ⏰",
+    "category_ar": "الخط الزمني والفرز السريع (Triage) ⏰",
+    "command": "uptime -s; uptime -p",
+    "description": "Shows when the system booted and how long it has been running.",
+    "description_ar": "يوضح متى أُقلع النظام ومنذ متى يعمل.",
+    "params": [],
+    "tags": [
+      "uptime",
+      "boot"
+    ]
+  },
+  {
+    "id": "time-fls-body",
+    "title": "Create Bodyfile Timeline 🧾",
+    "title_ar": "إنشاء ملف الخط الزمني (Bodyfile) 🧾",
+    "category": "Timeline & Triage ⏰",
+    "category_ar": "الخط الزمني والفرز السريع (Triage) ⏰",
+    "command": "fls -r -m / -o {sector_offset} {image_path} > {output_dir}/bodyfile.txt",
+    "description": "Generates a bodyfile of MACB times for every file in an image.",
+    "description_ar": "ينشئ ملف (Bodyfile) بأوقات (MACB) لكل ملف في الصورة.",
+    "params": [
+      {
+        "key": "sector_offset",
+        "label": "Sector Offset 🧮",
+        "label_ar": "إزاحة القطاع (Sector Offset) 🧮",
+        "default": "2048"
+      },
+      {
+        "key": "image_path",
+        "label": "Evidence File Path 📄",
+        "label_ar": "مسار ملف الدليل 📄",
+        "default": "/evidence/disk.img"
+      },
+      {
+        "key": "output_dir",
+        "label": "Output Directory 📁",
+        "label_ar": "مجلد المخرجات 📁",
+        "default": "/evidence/output"
+      }
+    ],
+    "tags": [
+      "fls",
+      "bodyfile",
+      "timeline"
+    ]
+  },
+  {
+    "id": "time-mactime",
+    "title": "Convert Bodyfile to Timeline 📅",
+    "title_ar": "تحويل (Bodyfile) إلى خط زمني 📅",
+    "category": "Timeline & Triage ⏰",
+    "category_ar": "الخط الزمني والفرز السريع (Triage) ⏰",
+    "command": "mactime -b {output_dir}/bodyfile.txt -d > {output_dir}/timeline.csv",
+    "description": "Turns a bodyfile into a sorted CSV timeline of file activity.",
+    "description_ar": "يحوّل ملف (Bodyfile) إلى خط زمني مرتب بصيغة (CSV) لنشاط الملفات.",
+    "params": [
+      {
+        "key": "output_dir",
+        "label": "Output Directory 📁",
+        "label_ar": "مجلد المخرجات 📁",
+        "default": "/evidence/output"
+      }
+    ],
+    "tags": [
+      "mactime",
+      "timeline",
+      "csv"
+    ]
+  },
+  {
+    "id": "time-log2timeline",
+    "title": "Build Plaso Super Timeline 🧵",
+    "title_ar": "بناء خط زمني شامل بأداة (Plaso) 🧵",
+    "category": "Timeline & Triage ⏰",
+    "category_ar": "الخط الزمني والفرز السريع (Triage) ⏰",
+    "command": "log2timeline.py --storage-file {output_dir}/plaso.dump {image_path}",
+    "description": "Parses an image into a Plaso storage file combining many artifact types.",
+    "description_ar": "يحلل الصورة إلى ملف (Plaso) يجمع أنواعًا كثيرة من الآثار الرقمية.",
+    "params": [
+      {
+        "key": "output_dir",
+        "label": "Output Directory 📁",
+        "label_ar": "مجلد المخرجات 📁",
+        "default": "/evidence/output"
+      },
+      {
+        "key": "image_path",
+        "label": "Evidence File Path 📄",
+        "label_ar": "مسار ملف الدليل 📄",
+        "default": "/evidence/disk.img"
+      }
+    ],
+    "tags": [
+      "plaso",
+      "log2timeline",
+      "supertimeline"
+    ]
+  },
+  {
+    "id": "time-psort",
+    "title": "Export Plaso Timeline to CSV 📤",
+    "title_ar": "تصدير خط (Plaso) إلى (CSV) 📤",
+    "category": "Timeline & Triage ⏰",
+    "category_ar": "الخط الزمني والفرز السريع (Triage) ⏰",
+    "command": "psort.py -o l2tcsv -w {timeline_file} {output_dir}/plaso.dump",
+    "description": "Sorts and exports Plaso events to CSV.",
+    "description_ar": "يرتب أحداث (Plaso) ويصدّرها بصيغة (CSV).",
+    "params": [
+      {
+        "key": "timeline_file",
+        "label": "Timeline CSV 🕒",
+        "label_ar": "ملف الخط الزمني (CSV) 🕒",
+        "default": "/evidence/timeline.csv"
+      },
+      {
+        "key": "output_dir",
+        "label": "Output Directory 📁",
+        "label_ar": "مجلد المخرجات 📁",
+        "default": "/evidence/output"
+      }
+    ],
+    "tags": [
+      "plaso",
+      "psort",
+      "export"
+    ]
+  },
+  {
+    "id": "time-pinfo",
+    "title": "Inspect Plaso Storage 🔎",
+    "title_ar": "فحص ملف تخزين (Plaso) 🔎",
+    "category": "Timeline & Triage ⏰",
+    "category_ar": "الخط الزمني والفرز السريع (Triage) ⏰",
+    "command": "pinfo.py {output_dir}/plaso.dump",
+    "description": "Shows a summary of a Plaso storage file.",
+    "description_ar": "يعرض ملخصًا لملف تخزين (Plaso).",
+    "params": [
+      {
+        "key": "output_dir",
+        "label": "Output Directory 📁",
+        "label_ar": "مجلد المخرجات 📁",
+        "default": "/evidence/output"
+      }
+    ],
+    "tags": [
+      "plaso",
+      "pinfo",
+      "summary"
+    ]
+  },
+  {
+    "id": "time-find-newer",
+    "title": "Find Files Newer Than a Reference 🧭",
+    "title_ar": "البحث عن ملفات أحدث من مرجع 🧭",
+    "category": "Timeline & Triage ⏰",
+    "category_ar": "الخط الزمني والفرز السريع (Triage) ⏰",
+    "command": "find {search_dir} -newer {file_path} -type f",
+    "description": "Finds files modified after a known reference file such as a dropped payload.",
+    "description_ar": "يجد الملفات التي عُدّلت بعد ملف مرجعي معروف مثل حمولة مزروعة.",
+    "params": [
+      {
+        "key": "search_dir",
+        "label": "Search Directory 📂",
+        "label_ar": "مجلد البحث 📂",
+        "default": "/home"
+      },
+      {
+        "key": "file_path",
+        "label": "Target File Path 🎯",
+        "label_ar": "مسار الملف المستهدف 🎯",
+        "default": "/home/user/malicious.sh"
+      }
+    ],
+    "tags": [
+      "find",
+      "newer",
+      "reference"
+    ]
+  },
+  {
+    "id": "time-find-window",
+    "title": "Find Files in a Time Window 🪟",
+    "title_ar": "البحث عن ملفات ضمن نافذة زمنية 🪟",
+    "category": "Timeline & Triage ⏰",
+    "category_ar": "الخط الزمني والفرز السريع (Triage) ⏰",
+    "command": "find {search_dir} -type f -newermt \"{date_start}\" ! -newermt \"{date_end}\"",
+    "description": "Finds files modified between two dates.",
+    "description_ar": "يجد الملفات التي عُدّلت بين تاريخين.",
+    "params": [
+      {
+        "key": "search_dir",
+        "label": "Search Directory 📂",
+        "label_ar": "مجلد البحث 📂",
+        "default": "/home"
+      },
+      {
+        "key": "date_start",
+        "label": "Start Date 📅",
+        "label_ar": "تاريخ البداية 📅",
+        "default": "2026-09-01 00:00:00"
+      },
+      {
+        "key": "date_end",
+        "label": "End Date 📅",
+        "label_ar": "تاريخ النهاية 📅",
+        "default": "2026-10-01 00:00:00"
+      }
+    ],
+    "tags": [
+      "find",
+      "time",
+      "window"
+    ]
+  },
+  {
+    "id": "time-volatile-bundle",
+    "title": "Collect Volatile Data Bundle 🧰",
+    "title_ar": "جمع حزمة البيانات المتطايرة 🧰",
+    "category": "Timeline & Triage ⏰",
+    "category_ar": "الخط الزمني والفرز السريع (Triage) ⏰",
+    "command": "(date; uname -a; uptime; who; ps auxww; ss -tulpn; lsmod) > {output_dir}/volatile.txt",
+    "description": "Captures key volatile state into one text file in order of volatility.",
+    "description_ar": "يلتقط أهم حالات النظام المتطايرة (Volatile) في ملف نصي واحد بحسب ترتيب التطاير.",
+    "params": [
+      {
+        "key": "output_dir",
+        "label": "Output Directory 📁",
+        "label_ar": "مجلد المخرجات 📁",
+        "default": "/evidence/output"
+      }
+    ],
+    "tags": [
+      "triage",
+      "volatile",
+      "collection"
+    ]
+  },
+  {
+    "id": "time-tar-evidence",
+    "title": "Archive Collected Evidence 🗜️",
+    "title_ar": "أرشفة الأدلة المجمّعة 🗜️",
+    "category": "Timeline & Triage ⏰",
+    "category_ar": "الخط الزمني والفرز السريع (Triage) ⏰",
+    "command": "tar -czvf {archive_path} {output_dir}",
+    "description": "Packages the evidence folder into a compressed archive for transfer.",
+    "description_ar": "يحزم مجلد الأدلة في أرشيف مضغوط لنقله.",
+    "params": [
+      {
+        "key": "archive_path",
+        "label": "Archive Path 🗜️",
+        "label_ar": "مسار الأرشيف 🗜️",
+        "default": "/evidence/case001.tar.gz"
+      },
+      {
+        "key": "output_dir",
+        "label": "Output Directory 📁",
+        "label_ar": "مجلد المخرجات 📁",
+        "default": "/evidence/output"
+      }
+    ],
+    "tags": [
+      "tar",
+      "archive",
+      "evidence"
+    ]
+  },
+  {
+    "id": "time-os-info",
+    "title": "Record OS and Kernel Version 🖥️",
+    "title_ar": "تسجيل إصدار النظام والنواة 🖥️",
+    "category": "Timeline & Triage ⏰",
+    "category_ar": "الخط الزمني والفرز السريع (Triage) ⏰",
+    "command": "uname -a; cat /etc/os-release",
+    "description": "Documents the exact OS and kernel version of the host.",
+    "description_ar": "يوثّق الإصدار الدقيق لنظام التشغيل والنواة على الجهاز.",
+    "params": [],
+    "tags": [
+      "uname",
+      "os",
+      "kernel"
+    ]
+  },
+  {
+    "id": "cont-docker-ps",
+    "title": "List All Containers 🐳",
+    "title_ar": "سرد كل الحاويات 🐳",
+    "category": "Containers & Cloud ☁️",
+    "category_ar": "الحاويات والسحابة (Docker / Cloud) ☁️",
+    "command": "docker ps -a --no-trunc",
+    "description": "Lists running and stopped containers with full commands.",
+    "description_ar": "يسرد الحاويات العاملة والمتوقفة مع أوامرها كاملة.",
+    "params": [],
+    "tags": [
+      "docker",
+      "containers"
+    ]
+  },
+  {
+    "id": "cont-docker-inspect",
+    "title": "Inspect a Container 🔬",
+    "title_ar": "فحص حاوية 🔬",
+    "category": "Containers & Cloud ☁️",
+    "category_ar": "الحاويات والسحابة (Docker / Cloud) ☁️",
+    "command": "docker inspect {container}",
+    "description": "Dumps configuration, mounts, networks, and environment of a container.",
+    "description_ar": "يعرض إعدادات الحاوية ووحدات التخزين والشبكات ومتغيرات البيئة.",
+    "params": [
+      {
+        "key": "container",
+        "label": "Container ID 🐳",
+        "label_ar": "معرّف الحاوية (Container ID) 🐳",
+        "default": "abc123def456"
+      }
+    ],
+    "tags": [
+      "docker",
+      "inspect",
+      "config"
+    ]
+  },
+  {
+    "id": "cont-docker-diff",
+    "title": "Show Container Filesystem Changes 🧬",
+    "title_ar": "عرض تغييرات نظام ملفات الحاوية 🧬",
+    "category": "Containers & Cloud ☁️",
+    "category_ar": "الحاويات والسحابة (Docker / Cloud) ☁️",
+    "command": "docker diff {container}",
+    "description": "Lists files added, changed, or deleted since the container started.",
+    "description_ar": "يسرد الملفات المضافة أو المعدّلة أو المحذوفة منذ بدء الحاوية.",
+    "params": [
+      {
+        "key": "container",
+        "label": "Container ID 🐳",
+        "label_ar": "معرّف الحاوية (Container ID) 🐳",
+        "default": "abc123def456"
+      }
+    ],
+    "tags": [
+      "docker",
+      "diff",
+      "changes"
+    ]
+  },
+  {
+    "id": "cont-docker-logs",
+    "title": "Read Container Logs 📝",
+    "title_ar": "قراءة سجلات الحاوية 📝",
+    "category": "Containers & Cloud ☁️",
+    "category_ar": "الحاويات والسحابة (Docker / Cloud) ☁️",
+    "command": "docker logs --timestamps {container}",
+    "description": "Shows container stdout and stderr with timestamps.",
+    "description_ar": "يعرض مخرجات الحاوية القياسية ومخرجات الأخطاء مع الأوقات.",
+    "params": [
+      {
+        "key": "container",
+        "label": "Container ID 🐳",
+        "label_ar": "معرّف الحاوية (Container ID) 🐳",
+        "default": "abc123def456"
+      }
+    ],
+    "tags": [
+      "docker",
+      "logs"
+    ]
+  },
+  {
+    "id": "cont-docker-export",
+    "title": "Export Container Filesystem 📦",
+    "title_ar": "تصدير نظام ملفات الحاوية 📦",
+    "category": "Containers & Cloud ☁️",
+    "category_ar": "الحاويات والسحابة (Docker / Cloud) ☁️",
+    "command": "docker export {container} -o {output_dir}/container.tar",
+    "description": "Exports the filesystem of a container to a tar archive for offline analysis.",
+    "description_ar": "يصدّر نظام ملفات الحاوية إلى أرشيف (tar) لتحليله خارج الجهاز.",
+    "params": [
+      {
+        "key": "container",
+        "label": "Container ID 🐳",
+        "label_ar": "معرّف الحاوية (Container ID) 🐳",
+        "default": "abc123def456"
+      },
+      {
+        "key": "output_dir",
+        "label": "Output Directory 📁",
+        "label_ar": "مجلد المخرجات 📁",
+        "default": "/evidence/output"
+      }
+    ],
+    "tags": [
+      "docker",
+      "export",
+      "evidence"
+    ]
+  },
+  {
+    "id": "cont-docker-history",
+    "title": "Show Image Build History 🏗️",
+    "title_ar": "عرض تاريخ بناء الصورة 🏗️",
+    "category": "Containers & Cloud ☁️",
+    "category_ar": "الحاويات والسحابة (Docker / Cloud) ☁️",
+    "command": "docker history --no-trunc {image_name}",
+    "description": "Reveals the commands used to build an image layer by layer.",
+    "description_ar": "يكشف الأوامر المستخدمة في بناء الصورة طبقةً بطبقة.",
+    "params": [
+      {
+        "key": "image_name",
+        "label": "Image Name 🖼️",
+        "label_ar": "اسم الصورة (Image) 🖼️",
+        "default": "nginx:latest"
+      }
+    ],
+    "tags": [
+      "docker",
+      "history",
+      "layers"
+    ]
+  },
+  {
+    "id": "cont-kube-pods",
+    "title": "List All Kubernetes Pods ☸️",
+    "title_ar": "سرد كل الـ (Pods) في (Kubernetes) ☸️",
+    "category": "Containers & Cloud ☁️",
+    "category_ar": "الحاويات والسحابة (Docker / Cloud) ☁️",
+    "command": "kubectl get pods -A -o wide",
+    "description": "Lists pods across namespaces with node and IP details.",
+    "description_ar": "يسرد الـ (Pods) عبر كل مساحات الأسماء مع تفاصيل العقدة والعنوان.",
+    "params": [],
+    "tags": [
+      "kubectl",
+      "pods"
+    ]
+  },
+  {
+    "id": "cont-kube-describe",
+    "title": "Describe a Pod 📄",
+    "title_ar": "وصف (Pod) 📄",
+    "category": "Containers & Cloud ☁️",
+    "category_ar": "الحاويات والسحابة (Docker / Cloud) ☁️",
+    "command": "kubectl describe pod {pod} -n {namespace}",
+    "description": "Shows events, images, and configuration for a pod.",
+    "description_ar": "يعرض الأحداث والصور والإعدادات الخاصة بـ (Pod).",
+    "params": [
+      {
+        "key": "pod",
+        "label": "Pod Name ☸️",
+        "label_ar": "اسم الـ (Pod) ☸️",
+        "default": "web-pod-1"
+      },
+      {
+        "key": "namespace",
+        "label": "Namespace 🏷️",
+        "label_ar": "مساحة الأسماء (Namespace) 🏷️",
+        "default": "default"
+      }
+    ],
+    "tags": [
+      "kubectl",
+      "describe",
+      "pod"
+    ]
+  },
+  {
+    "id": "cont-kube-logs",
+    "title": "Read Pod Logs 🪵",
+    "title_ar": "قراءة سجلات (Pod) 🪵",
+    "category": "Containers & Cloud ☁️",
+    "category_ar": "الحاويات والسحابة (Docker / Cloud) ☁️",
+    "command": "kubectl logs {pod} -n {namespace} --all-containers --timestamps",
+    "description": "Collects logs from all containers in a pod with timestamps.",
+    "description_ar": "يجمع سجلات كل الحاويات داخل (Pod) مع الأوقات.",
+    "params": [
+      {
+        "key": "pod",
+        "label": "Pod Name ☸️",
+        "label_ar": "اسم الـ (Pod) ☸️",
+        "default": "web-pod-1"
+      },
+      {
+        "key": "namespace",
+        "label": "Namespace 🏷️",
+        "label_ar": "مساحة الأسماء (Namespace) 🏷️",
+        "default": "default"
+      }
+    ],
+    "tags": [
+      "kubectl",
+      "logs",
+      "pod"
+    ]
+  },
+  {
+    "id": "cont-aws-cloudtrail",
+    "title": "Look Up Recent CloudTrail Events ☁️",
+    "title_ar": "استعلام أحداث (CloudTrail) الأخيرة ☁️",
+    "category": "Containers & Cloud ☁️",
+    "category_ar": "الحاويات والسحابة (Docker / Cloud) ☁️",
+    "command": "aws cloudtrail lookup-events --max-results 50",
+    "description": "Retrieves recent AWS API activity for incident review.",
+    "description_ar": "يسترجع أحدث نشاطات واجهة (AWS API) لمراجعة الحادثة.",
+    "params": [],
+    "tags": [
+      "aws",
+      "cloudtrail",
+      "audit"
+    ]
+  }
+]
