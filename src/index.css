@@ -23,6 +23,10 @@ code {
   font-family: "JetBrains Mono", monospace !important;
 }
 
+iframe, #nl-badge-frame {
+  display: none !important;
+}
+
 /* Modern browsers — Chrome 121+, Edge 121+, Firefox, Safari 18.2+ */
 * {
   scrollbar-width: 6px;
